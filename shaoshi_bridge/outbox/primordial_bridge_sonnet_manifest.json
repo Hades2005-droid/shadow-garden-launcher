@@ -1,0 +1,38 @@
+{
+  "schema": "shaoshi_bridge.sonnet_manifest.v1",
+  "bridge_module": "shaoshi_bridge/south_star/primordial_bridge.py",
+  "unified_game_module": "shaoshi_bridge/south_star/shadowgarden_unified_game.py",
+  "gift_taker_module": "shaoshi_bridge/south_star/devin_gift_taker.py",
+  "signature": "f2e596cd043d6819",
+  "test_count": 45,
+  "test_files": [
+    "shaoshi_bridge/tests/test_primordial_bridge.py",
+    "shaoshi_bridge/tests/test_shadowgarden_unified_game.py"
+  ],
+  "controls": {
+    "external_fetch": false,
+    "browser_automation": false,
+    "agent_broadcast": false,
+    "credentials_allowed": false,
+    "generated_code_execution": false,
+    "real_world_navigation": false,
+    "flight_instruction": false
+  },
+  "bounds": {
+    "max_input_chars": 4096,
+    "max_output_tokens": 512,
+    "max_game_turns": 24,
+    "mastery_range": [0, 10]
+  },
+  "pipeline_stages": [
+    "morse_validate",
+    "morse_decode",
+    "hanzi_overlay",
+    "token_generation",
+    "source_generation"
+  ],
+  "hanzi_stroke_positions": [1, 4, 7, 10, 13, 16, 20, 24],
+  "game_terminal_states": ["complete", "aborted"],
+  "game_default_actions": ["launch", "hold", "correct", "hold", "land"],
+  "status": "ready"
+}

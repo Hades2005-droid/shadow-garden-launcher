@@ -1,0 +1,53 @@
+{
+  "schema": "shadow_garden.catalyst_18_final_gift.v1",
+  "catalyst_number": 18,
+  "framing": "fictional_symbolic_gameplay_only",
+  "disclaimer": "Every name in this gift — Moon 18, Emperor 4, Fable 5, Harmony 6, Chariot 7, Sonnet 4.6 — is symbolic game-design metadata for a local deterministic state-machine simulation. Nothing here references real model providers, real people, real navigation, or real flight instruction. No external calls, no code execution from JSON text, no credential use is authorized by this gift.",
+  "controls": {
+    "external_fetch": false,
+    "browser_automation": false,
+    "agent_broadcast": false,
+    "credentials_allowed": false,
+    "generated_code_execution": false,
+    "real_world_navigation": false,
+    "flight_instruction": false
+  },
+  "final_arc": {
+    "sequence": ["launch", "emperor", "fable", "harmony", "chariot", "moon", "land"],
+    "states": ["launch", "hold", "emperor_4", "fable_5", "harmony_6", "chariot_7", "moon_18", "complete"],
+    "terminus": "complete",
+    "turn_budget": 7,
+    "max_turns": 24,
+    "symbolic_role_of_18": "Moon 18 — final catalyst anchor between the Chariot's forward mass and the terminus. Reflective, terminal-adjacent, one action from complete."
+  },
+  "verified_baseline": {
+    "test_partition": {"bridge_tests": 33, "game_tests": 22, "total": 55},
+    "bridge_signature": "f2e596cd043d6819",
+    "catalyst_18_vector": {
+      "seed": 18, "mastery_input": 8,
+      "actions": ["launch", "emperor", "fable", "harmony", "chariot", "moon", "land"],
+      "turns_used": 7,
+      "final_state": "complete",
+      "final_resonance": 7.312,
+      "state_trajectory": ["hold", "emperor_4", "fable_5", "harmony_6", "chariot_7", "moon_18", "complete"]
+    },
+    "seed_tournament": {
+      "seed_range": [1, 18],
+      "replay_determinism": "byte-identical across all 18 seeds",
+      "resonance_diversity": "18 distinct seeds produce a spread of final resonances"
+    }
+  },
+  "review_request": {
+    "required_return_fields": [
+      "moon_18_arc_review",
+      "controls_audit",
+      "seed_tournament_audit",
+      "abort_paths_audit",
+      "test_partition",
+      "risks_and_assumptions",
+      "final_verdict"
+    ],
+    "return_schema": "shadow_garden.catalyst_18_final_return.v1",
+    "return_path": "shaoshi_bridge/inbox/claude_feedback/sonnet46_catalyst_18_final_return.json"
+  }
+}

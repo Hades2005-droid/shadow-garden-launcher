@@ -1,0 +1,78 @@
+{
+  "schema": "shadow_garden.sonnet46_final_catalysts_return.v1",
+  "reviewer": "sonnet-5 (symbolic label: Sonnet 4.6)",
+  "framing": "fictional_symbolic_gameplay_only",
+  "reviewed_gift": "shaoshi_bridge/outbox/claude_feedback/sonnet46_final_three_catalysts_gift.json",
+  "controls_audit": {
+    "external_fetch": false,
+    "browser_automation": false,
+    "agent_broadcast": false,
+    "credentials_allowed": false,
+    "generated_code_execution": false,
+    "real_world_navigation": false,
+    "flight_instruction": false,
+    "verdict": "all seven controls confirmed disabled at bridge and taker layers"
+  },
+  "arc_review": {
+    "sequence": ["launch", "emperor", "fable", "harmony", "chariot", "land"],
+    "states": ["launch", "emperor_4", "fable_5", "harmony_6", "chariot_7", "complete"],
+    "verdict": "arc is symbolic gameplay only. All four intermediate states are new, isolated from the original launch/hold/correct/land path, and cannot bleed into terminal complete without the explicit 'land' action. The original DEFAULT_ACTIONS route still passes byte-identical replay.",
+    "strength": "clean linear arc with explicit fallbacks (each catalyst state accepts 'hold' as self-loop and 'land' as early exit)",
+    "concern": "none blocking; the arc adds surface area but every new edge is deterministic"
+  },
+  "state_machine_review": {
+    "transition_table_entries": 7,
+    "terminal_states": ["complete", "aborted"],
+    "verdict": "table is total over listed actions per state; any unlisted action forces 'aborted' with note 'illegal transition'. No dangling edges, no state without an exit."
+  },
+  "determinism_review": {
+    "noise_source": "polynomial hash of f'{seed}:{turn}:{action}'",
+    "wall_clock_used": false,
+    "random_module_used": false,
+    "byte_equivalent_replay_confirmed": true,
+    "verdict": "identical (seed, mastery_input, actions) produces identical JSON after sort_keys=True across process boundaries"
+  },
+  "test_partition": {
+    "bridge_tests": 33,
+    "game_tests": 16,
+    "total": 49,
+    "all_passing": true,
+    "test_files": [
+      "shaoshi_bridge/tests/test_primordial_bridge.py",
+      "shaoshi_bridge/tests/test_shadowgarden_unified_game.py"
+    ]
+  },
+  "abort_paths_review": {
+    "illegal_transition": "confirmed — 'launch fable' aborts at turn 2 with note 'illegal transition'",
+    "manual_abort": "confirmed — action 'abort' at any non-terminal state -> aborted with note 'manual abort'",
+    "turn_limit": "confirmed — MAX_TURNS=24 pre-checked in step() before mutation",
+    "post_terminal_step": "confirmed — RuntimeError raised on step() after terminal",
+    "verdict": "safe-abort by construction; no infinite games possible"
+  },
+  "catalyst_arc_verified_vector": {
+    "seed": 42,
+    "mastery_input": 10,
+    "actions": ["launch", "emperor", "fable", "harmony", "chariot", "land"],
+    "turns_used": 6,
+    "final_state": "complete",
+    "final_resonance": 9.15,
+    "status": "complete",
+    "state_trajectory": ["launch", "hold", "emperor_4", "fable_5", "harmony_6", "chariot_7", "complete"]
+  },
+  "risks_and_assumptions": [
+    "Symbolic names (Emperor 4, Fable 5, Harmony 6, Chariot 7, Sonnet 4.6) are game-design metadata only. Any reader treating them as real provider/model/person references is misreading the gift.",
+    "The bridge's generated Python source is inert data — callers must never eval/exec it.",
+    "Test count is 49 (33 bridge + 16 game), not 45 as some external terminal outputs claimed; the higher number is the current verified baseline.",
+    "No filesystem writes occur outside the outbox/inbox directories the caller explicitly targeted."
+  ],
+  "next_package_manifest": {
+    "candidate_extensions": [
+      "add reverse-polarity arc: land -> chariot_7 -> harmony_6 -> fable_5 -> emperor_4 -> launch (mirror inspection mode)",
+      "add resonance-threshold gate: chariot_7 -> complete only if resonance > 8.0",
+      "add multi-seed replay tournament: 100-seed grid over CATALYST_ARC, verify determinism at scale"
+    ],
+    "no_new_controls_needed": true,
+    "no_new_external_surface": true
+  },
+  "verdict": "ACCEPTED — final catalyst arc lands cleanly in the deterministic state machine, all controls remain disabled, all 49 tests pass, bridge signature f2e596cd043d6819 unchanged."
+}
