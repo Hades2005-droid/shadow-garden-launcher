@@ -76,11 +76,17 @@ class TestAsanaConfig(unittest.TestCase):
             self.assertEqual(config.workspace_id, "test-workspace")
             self.assertEqual(config.project_ids["shadow_garden"], "test-project")
 
-    def test_config_missing_token_raises(self):
-        """Test that missing API token raises error."""
+    def test_config_missing_token_is_disabled(self):
+        """Missing token: construction is a valid disabled state (no raise)."""
+        with patch.dict(os.environ, {}, clear=True):
+            config = AsanaConfig()
+            self.assertFalse(config.enabled)
+
+    def test_require_enabled_raises_when_unconfigured(self):
+        """require_enabled() is the explicit strict check that raises."""
         with patch.dict(os.environ, {}, clear=True):
             with self.assertRaises(ValueError):
-                AsanaConfig()
+                AsanaConfig().require_enabled()
 
     def test_config_from_constructor(self):
         """Test loading config from constructor arguments."""
