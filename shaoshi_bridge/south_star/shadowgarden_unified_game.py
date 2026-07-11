@@ -34,13 +34,26 @@ MAX_TURNS = 24
 
 # state -> {action: next_state}. Any action not listed for the current state,
 # or the literal action "abort", forces a transition to "aborted".
+#
+# Final catalyst arc (fictional, symbolic gameplay only):
+#   launch -> emperor_4 -> fable_5 -> harmony_6 -> chariot_7 -> complete
+# These names are game-design metadata for a local state machine — they are
+# NOT references to real model providers, real people, or real navigation.
 TRANSITION_TABLE: dict[str, dict[str, str]] = {
-    "launch":  {"launch": "hold", "hold": "hold", "correct": "correct"},
-    "hold":    {"hold": "hold", "correct": "correct", "land": "complete"},
-    "correct": {"hold": "hold", "correct": "correct", "land": "complete"},
+    "launch":    {"launch": "hold", "hold": "hold", "correct": "correct",
+                  "emperor": "emperor_4"},
+    "hold":      {"hold": "hold", "correct": "correct", "land": "complete",
+                  "emperor": "emperor_4"},
+    "correct":   {"hold": "hold", "correct": "correct", "land": "complete",
+                  "emperor": "emperor_4"},
+    "emperor_4": {"fable": "fable_5", "hold": "emperor_4", "land": "complete"},
+    "fable_5":   {"harmony": "harmony_6", "hold": "fable_5", "land": "complete"},
+    "harmony_6": {"chariot": "chariot_7", "hold": "harmony_6", "land": "complete"},
+    "chariot_7": {"land": "complete", "hold": "chariot_7"},
 }
 TERMINAL_STATES = frozenset({"complete", "aborted"})
 DEFAULT_ACTIONS = ["launch", "hold", "correct", "hold", "land"]
+CATALYST_ARC = ["launch", "emperor", "fable", "harmony", "chariot", "land"]
 
 
 @dataclass

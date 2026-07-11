@@ -1,0 +1,55 @@
+{
+  "schema": "shadow_garden.sonnet46_final_three_catalysts_gift.v1",
+  "framing": "fictional_symbolic_gameplay_only",
+  "disclaimer": "All names in this gift — Emperor 4, Fable 5, Harmony 6, Chariot 7, Sonnet 4.6 — are symbolic game-design metadata for a local deterministic state-machine simulation. They are NOT references to real model providers, real people, real navigation, or real flight instruction. Nothing here authorizes external calls, code execution from JSON text, or credential use.",
+  "controls": {
+    "external_fetch": false,
+    "browser_automation": false,
+    "agent_broadcast": false,
+    "credentials_allowed": false,
+    "generated_code_execution": false,
+    "real_world_navigation": false,
+    "flight_instruction": false
+  },
+  "arc": {
+    "sequence": ["launch", "emperor", "fable", "harmony", "chariot", "land"],
+    "states_visited": ["launch", "emperor_4", "fable_5", "harmony_6", "chariot_7", "complete"],
+    "terminal": "complete",
+    "turn_budget": 6,
+    "max_turns": 24,
+    "symbolic_roles": {
+      "emperor_4": "anchor / structural lockdown",
+      "fable_5": "narrative unfold",
+      "harmony_6": "equilibrium bind",
+      "chariot_7": "forward mass to terminus"
+    }
+  },
+  "review_request": {
+    "required_return_fields": [
+      "arc_review",
+      "state_machine_review",
+      "determinism_review",
+      "test_partition",
+      "abort_paths_review",
+      "controls_audit",
+      "risks_and_assumptions",
+      "next_package_manifest"
+    ],
+    "return_schema": "shadow_garden.sonnet46_final_catalysts_return.v1",
+    "return_path": "shaoshi_bridge/inbox/claude_feedback/sonnet46_final_catalysts_return.json"
+  },
+  "verified_baseline": {
+    "test_partition": {"bridge_tests": 33, "game_tests": 16, "total": 49},
+    "default_action_vector": {
+      "seed": 42, "mastery_input": 10,
+      "actions": ["launch", "hold", "correct", "hold", "land"],
+      "turns_used": 5, "status": "complete", "final_resonance": 10.298
+    },
+    "catalyst_arc_vector": {
+      "seed": 42, "mastery_input": 10,
+      "actions": ["launch", "emperor", "fable", "harmony", "chariot", "land"],
+      "turns_used": 6, "status": "complete"
+    },
+    "bridge_signature": "f2e596cd043d6819"
+  }
+}

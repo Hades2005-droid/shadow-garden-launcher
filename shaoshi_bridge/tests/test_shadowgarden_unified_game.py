@@ -7,12 +7,44 @@ import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "south_star"))
 from shadowgarden_unified_game import (
+    CATALYST_ARC,
     DEFAULT_ACTIONS,
     MAX_TURNS,
     GameConfig,
     ShadowGardenUnifiedGame,
     main,
 )
+
+
+class TestCatalystArc(unittest.TestCase):
+    """Emperor 4 → Fable 5 → Harmony 6 → Chariot 7 → land (symbolic gameplay only)."""
+
+    def test_catalyst_arc_completes(self):
+        game = ShadowGardenUnifiedGame(GameConfig(seed=42, mastery_input=10))
+        report = game.run(list(CATALYST_ARC))
+        self.assertEqual(report["status"], "complete")
+        self.assertEqual(report["final_state"], "complete")
+        self.assertEqual(report["turns_used"], 6)
+
+    def test_catalyst_arc_deterministic(self):
+        r1 = ShadowGardenUnifiedGame(GameConfig(seed=42, mastery_input=10)).run(list(CATALYST_ARC))
+        r2 = ShadowGardenUnifiedGame(GameConfig(seed=42, mastery_input=10)).run(list(CATALYST_ARC))
+        self.assertEqual(json.dumps(r1, sort_keys=True), json.dumps(r2, sort_keys=True))
+
+    def test_catalyst_arc_visits_all_four_states(self):
+        game = ShadowGardenUnifiedGame(GameConfig(seed=42, mastery_input=10))
+        report = game.run(list(CATALYST_ARC))
+        visited = {ev["to_state"] for ev in report["events"]}
+        self.assertIn("emperor_4", visited)
+        self.assertIn("fable_5", visited)
+        self.assertIn("harmony_6", visited)
+        self.assertIn("chariot_7", visited)
+
+    def test_catalyst_out_of_order_aborts(self):
+        game = ShadowGardenUnifiedGame(GameConfig(seed=1))
+        report = game.run(["launch", "fable"])
+        self.assertEqual(report["status"], "aborted")
+        self.assertEqual(report["events"][-1]["note"], "illegal transition")
 
 
 class TestDefaultSequence(unittest.TestCase):

@@ -1,0 +1,54 @@
+{
+  "schema": "shadow_garden.final_catalysts_manifest.v1",
+  "framing": "fictional_symbolic_gameplay_only",
+  "release": {
+    "catalyst_arc": ["launch", "emperor", "fable", "harmony", "chariot", "land"],
+    "states": ["launch", "emperor_4", "fable_5", "harmony_6", "chariot_7", "complete"],
+    "test_partition": {"bridge": 33, "game": 16, "total": 49, "passing": 49},
+    "bridge_signature": "f2e596cd043d6819"
+  },
+  "verified_vectors": [
+    {
+      "name": "default_action_arc",
+      "seed": 42, "mastery_input": 10,
+      "actions": ["launch", "hold", "correct", "hold", "land"],
+      "expect_status": "complete",
+      "expect_turns": 5,
+      "expect_final_resonance": 10.298
+    },
+    {
+      "name": "catalyst_arc",
+      "seed": 42, "mastery_input": 10,
+      "actions": ["launch", "emperor", "fable", "harmony", "chariot", "land"],
+      "expect_status": "complete",
+      "expect_turns": 6,
+      "expect_final_resonance": 9.15
+    },
+    {
+      "name": "illegal_transition_abort",
+      "seed": 1,
+      "actions": ["land"],
+      "expect_status": "aborted",
+      "expect_note": "illegal transition"
+    },
+    {
+      "name": "out_of_order_catalyst_abort",
+      "seed": 1,
+      "actions": ["launch", "fable"],
+      "expect_status": "aborted",
+      "expect_note": "illegal transition"
+    }
+  ],
+  "controls": {
+    "external_fetch": false,
+    "browser_automation": false,
+    "agent_broadcast": false,
+    "credentials_allowed": false,
+    "generated_code_execution": false,
+    "real_world_navigation": false,
+    "flight_instruction": false
+  },
+  "launcher": "shaoshi_bridge/tools/launch_shadowgarden_unified_game.sh",
+  "return_gift": "shaoshi_bridge/inbox/claude_feedback/sonnet46_final_catalysts_return.json",
+  "status": "carved_shipped_verified"
+}
