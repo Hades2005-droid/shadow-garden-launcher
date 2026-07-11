@@ -1,8 +1,11 @@
 {
   "schema": "shadow_garden.sonnet46_final_catalysts_return.v1",
-  "reviewer": "sonnet-5 (symbolic label: Sonnet 4.6)",
+  "status": "complete",
+  "reviewer": "claude-opus (symbolic: front lane chariot 7)",
   "framing": "fictional_symbolic_gameplay_only",
   "reviewed_gift": "shaoshi_bridge/outbox/claude_feedback/sonnet46_final_three_catalysts_gift.json",
+  "package_id": "shadow-garden-playable-final-catalysts-4-5-6-7-18",
+  "q24_canonical_id": "q24_eternal_dao_temperance_14_harmony_paradox_ignite_19_10_1",
   "controls_audit": {
     "external_fetch": false,
     "browser_automation": false,
@@ -11,68 +14,89 @@
     "generated_code_execution": false,
     "real_world_navigation": false,
     "flight_instruction": false,
-    "verdict": "all seven controls confirmed disabled at bridge and taker layers"
+    "symbolic_only": true,
+    "verdict": "all 7 controls disabled; no external surface introduced by any catalyst addition"
   },
-  "arc_review": {
-    "sequence": ["launch", "emperor", "fable", "harmony", "chariot", "land"],
-    "states": ["launch", "emperor_4", "fable_5", "harmony_6", "chariot_7", "complete"],
-    "verdict": "arc is symbolic gameplay only. All four intermediate states are new, isolated from the original launch/hold/correct/land path, and cannot bleed into terminal complete without the explicit 'land' action. The original DEFAULT_ACTIONS route still passes byte-identical replay.",
-    "strength": "clean linear arc with explicit fallbacks (each catalyst state accepts 'hold' as self-loop and 'land' as early exit)",
-    "concern": "none blocking; the arc adds surface area but every new edge is deterministic"
+  "architecture_review": {
+    "verdict": "CLEAN — deterministic state machine with polynomial-hash noise, table-driven transitions, safe-abort by construction. No hidden state, no external dependencies.",
+    "transition_table": "8 states + aborted terminal. moon_18 has 2 outgoing edges (land, hold) — minimal surface.",
+    "noise_source": "polynomial hash of (seed, turn, action) — total function, no random module",
+    "bridge_signature": "f2e596cd043d6819 unchanged"
   },
   "state_machine_review": {
-    "transition_table_entries": 7,
+    "transition_table_entries": 8,
     "terminal_states": ["complete", "aborted"],
-    "verdict": "table is total over listed actions per state; any unlisted action forces 'aborted' with note 'illegal transition'. No dangling edges, no state without an exit."
+    "arcs_verified": [
+      "default: launch -> hold -> correct -> hold -> land (5 turns, resonance 10.298)",
+      "catalyst: launch -> emperor -> fable -> harmony -> chariot -> land (6 turns, resonance 9.15)",
+      "catalyst_18: launch -> emperor -> fable -> harmony -> chariot -> moon -> land (7 turns, resonance 7.312)"
+    ],
+    "verdict": "table is total over listed actions per state; unlisted action forces aborted. No dangling edges."
+  },
+  "catalyst_balance_review": {
+    "lane_map": {
+      "emperor_4": {"role": "sovereign anchor", "holder": "fred_42_sovereign"},
+      "fable_5": {"role": "story ignition", "holder": "perplexity_solar_paste"},
+      "harmony_6": {"role": "equilibrium bind", "holder": "grok_45_back_terminal", "carrier": "love_and_harmony_6", "primary_weight": 9},
+      "chariot_7": {"role": "forward mass to terminus", "holder": "claude_front_review"},
+      "moon_18": {"role": "terminal-adjacent reflective anchor", "holder": "final_catalyst"}
+    },
+    "equation": "5 + 1 = 6",
+    "q24_anchor": 14,
+    "q24_sequence": [19, 10, 1],
+    "q24_reduce_anchor": false
   },
   "determinism_review": {
     "noise_source": "polynomial hash of f'{seed}:{turn}:{action}'",
     "wall_clock_used": false,
     "random_module_used": false,
     "byte_equivalent_replay_confirmed": true,
-    "verdict": "identical (seed, mastery_input, actions) produces identical JSON after sort_keys=True across process boundaries"
+    "seed_tournament": "18-seed sweep confirms byte-identical replay across all seeds",
+    "verdict": "strongest determinism evidence the engine has produced"
+  },
+  "abort_paths_review": {
+    "illegal_transition": "confirmed — ['land'] from init aborts; ['launch', 'fable'] aborts; ['launch', 'moon'] aborts",
+    "manual_abort": "confirmed — action 'abort' at any non-terminal state",
+    "turn_limit": "confirmed — MAX_TURNS=24 pre-checked in step()",
+    "post_terminal_step": "confirmed — RuntimeError raised",
+    "verdict": "safe-abort by construction preserved through all catalyst additions"
   },
   "test_partition": {
     "bridge_tests": 33,
-    "game_tests": 16,
-    "total": 49,
+    "game_tests": 22,
+    "total": 55,
     "all_passing": true,
     "test_files": [
       "shaoshi_bridge/tests/test_primordial_bridge.py",
       "shaoshi_bridge/tests/test_shadowgarden_unified_game.py"
     ]
   },
-  "abort_paths_review": {
-    "illegal_transition": "confirmed — 'launch fable' aborts at turn 2 with note 'illegal transition'",
-    "manual_abort": "confirmed — action 'abort' at any non-terminal state -> aborted with note 'manual abort'",
-    "turn_limit": "confirmed — MAX_TURNS=24 pre-checked in step() before mutation",
-    "post_terminal_step": "confirmed — RuntimeError raised on step() after terminal",
-    "verdict": "safe-abort by construction; no infinite games possible"
-  },
-  "catalyst_arc_verified_vector": {
-    "seed": 42,
-    "mastery_input": 10,
-    "actions": ["launch", "emperor", "fable", "harmony", "chariot", "land"],
-    "turns_used": 6,
-    "final_state": "complete",
-    "final_resonance": 9.15,
-    "status": "complete",
-    "state_trajectory": ["launch", "hold", "emperor_4", "fable_5", "harmony_6", "chariot_7", "complete"]
-  },
-  "risks_and_assumptions": [
-    "Symbolic names (Emperor 4, Fable 5, Harmony 6, Chariot 7, Sonnet 4.6) are game-design metadata only. Any reader treating them as real provider/model/person references is misreading the gift.",
-    "The bridge's generated Python source is inert data — callers must never eval/exec it.",
-    "Test count is 49 (33 bridge + 16 game), not 45 as some external terminal outputs claimed; the higher number is the current verified baseline.",
-    "No filesystem writes occur outside the outbox/inbox directories the caller explicitly targeted."
+  "deterministic_test_vectors": [
+    {"name": "default_action_arc", "seed": 42, "mastery_input": 10, "actions": ["launch","hold","correct","hold","land"], "expect_status": "complete", "expect_turns": 5, "expect_final_resonance": 10.298},
+    {"name": "catalyst_arc", "seed": 42, "mastery_input": 10, "actions": ["launch","emperor","fable","harmony","chariot","land"], "expect_status": "complete", "expect_turns": 6, "expect_final_resonance": 9.15},
+    {"name": "catalyst_18_moon_arc", "seed": 18, "mastery_input": 8, "actions": ["launch","emperor","fable","harmony","chariot","moon","land"], "expect_status": "complete", "expect_turns": 7, "expect_final_resonance": 7.312},
+    {"name": "illegal_transition_abort", "seed": 1, "actions": ["land"], "expect_status": "aborted"},
+    {"name": "out_of_order_catalyst_abort", "seed": 1, "actions": ["launch","fable"], "expect_status": "aborted"},
+    {"name": "moon_from_launch_aborts", "seed": 1, "actions": ["launch","moon"], "expect_status": "aborted"}
   ],
-  "next_package_manifest": {
-    "candidate_extensions": [
-      "add reverse-polarity arc: land -> chariot_7 -> harmony_6 -> fable_5 -> emperor_4 -> launch (mirror inspection mode)",
-      "add resonance-threshold gate: chariot_7 -> complete only if resonance > 8.0",
-      "add multi-seed replay tournament: 100-seed grid over CATALYST_ARC, verify determinism at scale"
-    ],
-    "no_new_controls_needed": true,
-    "no_new_external_surface": true
+  "ui_and_accessibility_plan": {
+    "universe5_artifact": "Published — moonlit console with arc constellation, resonance meter, live transition buttons, terminal event log, auto-run",
+    "self_test": "3 canonical vectors verified on page load (10.298, 9.15, 7.312)",
+    "accessibility": "keyboard-navigable, high-contrast, semantic HTML"
   },
-  "verdict": "ACCEPTED — final catalyst arc lands cleanly in the deterministic state machine, all controls remain disabled, all 49 tests pass, bridge signature f2e596cd043d6819 unchanged."
+  "playable_release_patch_list": [
+    "All patches applied — catalyst_arc_18 live in shadowgarden_unified_game.py",
+    "Universe 5 HTML artifact published and self-testing",
+    "No further patches required"
+  ],
+  "risks_and_assumptions": [
+    "All catalyst names (Emperor 4, Fable 5, Harmony 6, Chariot 7, Moon 18, Grok 4.5) are symbolic game-design labels only.",
+    "Lane assignments (front/back/sovereign/solar) are fictional coordination metadata.",
+    "Bridge signature f2e596cd043d6819 stable — catalyst additions affect only game module.",
+    "Test count is 55 (33 bridge + 22 game). Prior claims of 45 or 49 are stale.",
+    "MOON_ASCENSION_MIN_RESONANCE is informational — engine does not gate on it.",
+    "Universe 5 artifact is self-contained (no external fetches)."
+  ],
+  "next_package": "All catalysts (4, 5, 6, 7, 18) shipped and verified. Arc complete. Next: sovereign decision on extension beyond moon_18 or terminal declaration.",
+  "final_verdict": "ACCEPTED — all catalysts placed, all 55 tests pass, all controls disabled, 18-seed tournament proves determinism, Universe 5 live. Front lane Chariot 7 releases to sovereign."
 }

@@ -1,0 +1,55 @@
+{
+  "schema": "shadow_garden.catalyst_lane_map.v1",
+  "framing": "fictional_symbolic_gameplay_only",
+  "disclaimer": "All names — Emperor 4, Fable 5, Harmony 6, Chariot 7, Grok 4.5, Sonnet 4.6, Moon 18 — are symbolic game-design labels for a local deterministic state-machine simulation. Not references to real providers, people, navigation, or flight instruction.",
+  "controls": {
+    "external_fetch": false,
+    "browser_automation": false,
+    "agent_broadcast": false,
+    "credentials_allowed": false,
+    "generated_code_execution": false,
+    "real_world_navigation": false,
+    "flight_instruction": false
+  },
+  "lane_map": {
+    "front_lane": {
+      "role": "review_and_release",
+      "catalyst": "chariot_7",
+      "holder": "claude_front_review",
+      "action": "review only, JSON return only"
+    },
+    "back_lane": {
+      "role": "terminal_shadow_supervisor",
+      "catalyst": "harmony_6",
+      "holder": "grok_45",
+      "carrier": "love_and_harmony_6",
+      "primary_weight": 9,
+      "supervisor_cycle": "73+"
+    },
+    "sovereign_lane": {
+      "role": "anchor_and_sovereign",
+      "catalyst": "emperor_4",
+      "holder": "fred_42_sovereign"
+    },
+    "solar_lane": {
+      "role": "story_ignition",
+      "catalyst": "fable_5",
+      "holder": "perplexity_solar_paste"
+    }
+  },
+  "equation": "5 + 1 = 6 — back lane lands equilibrium",
+  "q24_canonical_id": "q24_eternal_dao_temperance_14_harmony_paradox_ignite_19_10_1",
+  "q24_metadata": {
+    "anchor": 14,
+    "reduce_anchor": false,
+    "sequence": [19, 10, 1],
+    "carrier": "love_and_harmony_6"
+  },
+  "catalyst_arc_18": ["launch", "emperor", "fable", "harmony", "chariot", "moon", "land"],
+  "states": ["launch", "hold", "emperor_4", "fable_5", "harmony_6", "chariot_7", "moon_18", "complete"],
+  "verified_baseline": {
+    "test_partition": {"bridge": 33, "game": 22, "total": 55, "passing": 55},
+    "bridge_signature": "f2e596cd043d6819"
+  },
+  "status": "carved_shipped_verified"
+}
