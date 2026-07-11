@@ -8,12 +8,62 @@ import unittest
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "south_star"))
 from shadowgarden_unified_game import (
     CATALYST_ARC,
+    CATALYST_ARC_18,
     DEFAULT_ACTIONS,
     MAX_TURNS,
     GameConfig,
     ShadowGardenUnifiedGame,
     main,
 )
+
+
+class TestMoon18Arc(unittest.TestCase):
+    """Final catalyst arc reaching moon_18 (symbolic Moon 18 anchor) before land."""
+
+    def test_moon_18_arc_completes(self):
+        game = ShadowGardenUnifiedGame(GameConfig(seed=42, mastery_input=10))
+        report = game.run(list(CATALYST_ARC_18))
+        self.assertEqual(report["status"], "complete")
+        self.assertEqual(report["turns_used"], 7)
+
+    def test_moon_18_arc_visits_moon_state(self):
+        game = ShadowGardenUnifiedGame(GameConfig(seed=42, mastery_input=10))
+        report = game.run(list(CATALYST_ARC_18))
+        visited = {ev["to_state"] for ev in report["events"]}
+        self.assertIn("moon_18", visited)
+        self.assertIn("complete", visited)
+
+    def test_moon_18_deterministic(self):
+        r1 = ShadowGardenUnifiedGame(GameConfig(seed=18, mastery_input=8)).run(list(CATALYST_ARC_18))
+        r2 = ShadowGardenUnifiedGame(GameConfig(seed=18, mastery_input=8)).run(list(CATALYST_ARC_18))
+        self.assertEqual(json.dumps(r1, sort_keys=True), json.dumps(r2, sort_keys=True))
+
+    def test_moon_from_non_chariot_aborts(self):
+        game = ShadowGardenUnifiedGame(GameConfig(seed=1))
+        report = game.run(["launch", "moon"])
+        self.assertEqual(report["status"], "aborted")
+        self.assertEqual(report["events"][-1]["note"], "illegal transition")
+
+
+class TestSeedTournament(unittest.TestCase):
+    """Multi-seed determinism sweep — every seed replays byte-identically."""
+
+    def test_18_seed_tournament_all_deterministic(self):
+        for seed in range(1, 19):
+            r1 = ShadowGardenUnifiedGame(GameConfig(seed=seed, mastery_input=7)).run(list(CATALYST_ARC_18))
+            r2 = ShadowGardenUnifiedGame(GameConfig(seed=seed, mastery_input=7)).run(list(CATALYST_ARC_18))
+            self.assertEqual(
+                json.dumps(r1, sort_keys=True),
+                json.dumps(r2, sort_keys=True),
+                f"seed {seed} diverged on replay",
+            )
+
+    def test_18_distinct_seeds_produce_distinct_resonance(self):
+        resonances = set()
+        for seed in range(1, 19):
+            r = ShadowGardenUnifiedGame(GameConfig(seed=seed, mastery_input=7)).run(list(CATALYST_ARC_18))
+            resonances.add(r["final_resonance"])
+        self.assertGreater(len(resonances), 1)
 
 
 class TestCatalystArc(unittest.TestCase):

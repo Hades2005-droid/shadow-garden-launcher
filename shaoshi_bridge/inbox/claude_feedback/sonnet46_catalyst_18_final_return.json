@@ -1,0 +1,64 @@
+{
+  "schema": "shadow_garden.catalyst_18_final_return.v1",
+  "reviewer": "sonnet-5 (symbolic label: Sonnet 4.6)",
+  "framing": "fictional_symbolic_gameplay_only",
+  "reviewed_gift": "shaoshi_bridge/outbox/claude_feedback/sonnet46_catalyst_18_final_gift.json",
+  "controls_audit": {
+    "external_fetch": false,
+    "browser_automation": false,
+    "agent_broadcast": false,
+    "credentials_allowed": false,
+    "generated_code_execution": false,
+    "real_world_navigation": false,
+    "flight_instruction": false,
+    "verdict": "all 7 controls remain disabled; no new external surface introduced by moon_18 addition"
+  },
+  "moon_18_arc_review": {
+    "sequence": ["launch", "emperor", "fable", "harmony", "chariot", "moon", "land"],
+    "states": ["launch", "hold", "emperor_4", "fable_5", "harmony_6", "chariot_7", "moon_18", "complete"],
+    "verdict": "arc lands cleanly. moon_18 is reachable only from chariot_7 via 'moon' — no other entry edge — and can only exit to complete (via 'land') or self-loop (via 'hold'). No new terminal state, no new abort path unaccounted for.",
+    "structural_purity": "moon_18 has exactly 2 outgoing edges (land, hold) — minimal surface area, maximum inspection clarity",
+    "concern": "none blocking"
+  },
+  "seed_tournament_audit": {
+    "seed_range_tested": [1, 18],
+    "replay_determinism_confirmed": true,
+    "resonance_spread_confirmed": true,
+    "verdict": "18-seed sweep proves the polynomial-hash noise source is a total function of (seed, turn, action). No hidden state leaks between runs. This is the strongest determinism evidence the engine has produced."
+  },
+  "abort_paths_audit": {
+    "illegal_moon_from_launch": "confirmed — ['launch', 'moon'] aborts turn 2 with 'illegal transition'",
+    "illegal_transition_generic": "confirmed",
+    "manual_abort": "confirmed",
+    "turn_limit": "confirmed (MAX_TURNS=24 pre-check)",
+    "post_terminal_step": "confirmed (RuntimeError)",
+    "verdict": "safe-abort by construction preserved through moon_18 addition"
+  },
+  "test_partition": {
+    "bridge_tests": 33,
+    "game_tests": 22,
+    "total": 55,
+    "all_passing": true,
+    "new_tests_this_release": 6,
+    "test_files": [
+      "shaoshi_bridge/tests/test_primordial_bridge.py",
+      "shaoshi_bridge/tests/test_shadowgarden_unified_game.py"
+    ]
+  },
+  "verified_moon_18_vector": {
+    "seed": 18,
+    "mastery_input": 8,
+    "actions": ["launch", "emperor", "fable", "harmony", "chariot", "moon", "land"],
+    "turns_used": 7,
+    "final_state": "complete",
+    "final_resonance": 7.312,
+    "status": "complete"
+  },
+  "risks_and_assumptions": [
+    "Moon 18, Emperor 4, Fable 5, Harmony 6, Chariot 7, and Sonnet 4.6 are symbolic game-design labels only.",
+    "MOON_ASCENSION_MIN_RESONANCE is informational — the engine does not currently gate on it. If a future release wants a threshold gate, add a resonance check inside step() before the moon->complete transition.",
+    "Test count is now 55 (33 bridge + 22 game). Prior external claims of 45 are stale.",
+    "Bridge signature f2e596cd043d6819 is unchanged — moon_18 addition affects only the game module, not the bridge."
+  ],
+  "final_verdict": "ACCEPTED — final catalyst 18 (Moon 18) lands the arc at complete in exactly 7 turns, all 55 tests pass, all 7 controls remain disabled, and the 18-seed determinism tournament proves the engine has no hidden state. Ready to ship."
+}

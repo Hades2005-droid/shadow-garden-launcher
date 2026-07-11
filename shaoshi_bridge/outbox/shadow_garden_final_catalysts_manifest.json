@@ -3,8 +3,9 @@
   "framing": "fictional_symbolic_gameplay_only",
   "release": {
     "catalyst_arc": ["launch", "emperor", "fable", "harmony", "chariot", "land"],
-    "states": ["launch", "emperor_4", "fable_5", "harmony_6", "chariot_7", "complete"],
-    "test_partition": {"bridge": 33, "game": 16, "total": 49, "passing": 49},
+    "catalyst_arc_18": ["launch", "emperor", "fable", "harmony", "chariot", "moon", "land"],
+    "states": ["launch", "hold", "emperor_4", "fable_5", "harmony_6", "chariot_7", "moon_18", "complete"],
+    "test_partition": {"bridge": 33, "game": 22, "total": 55, "passing": 55},
     "bridge_signature": "f2e596cd043d6819"
   },
   "verified_vectors": [
@@ -35,6 +36,21 @@
       "name": "out_of_order_catalyst_abort",
       "seed": 1,
       "actions": ["launch", "fable"],
+      "expect_status": "aborted",
+      "expect_note": "illegal transition"
+    },
+    {
+      "name": "catalyst_18_moon_arc",
+      "seed": 18, "mastery_input": 8,
+      "actions": ["launch", "emperor", "fable", "harmony", "chariot", "moon", "land"],
+      "expect_status": "complete",
+      "expect_turns": 7,
+      "expect_final_resonance": 7.312
+    },
+    {
+      "name": "moon_from_launch_aborts",
+      "seed": 1,
+      "actions": ["launch", "moon"],
       "expect_status": "aborted",
       "expect_note": "illegal transition"
     }

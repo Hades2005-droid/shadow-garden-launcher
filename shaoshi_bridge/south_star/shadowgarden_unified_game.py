@@ -49,11 +49,17 @@ TRANSITION_TABLE: dict[str, dict[str, str]] = {
     "emperor_4": {"fable": "fable_5", "hold": "emperor_4", "land": "complete"},
     "fable_5":   {"harmony": "harmony_6", "hold": "fable_5", "land": "complete"},
     "harmony_6": {"chariot": "chariot_7", "hold": "harmony_6", "land": "complete"},
-    "chariot_7": {"land": "complete", "hold": "chariot_7"},
+    # Chariot_7 can either land immediately or ascend into moon_18 (the final
+    # symbolic catalyst — Moon 18 in the frequency legend, terminal-adjacent).
+    "chariot_7": {"land": "complete", "hold": "chariot_7", "moon": "moon_18"},
+    "moon_18":   {"land": "complete", "hold": "moon_18"},
 }
 TERMINAL_STATES = frozenset({"complete", "aborted"})
 DEFAULT_ACTIONS = ["launch", "hold", "correct", "hold", "land"]
 CATALYST_ARC = ["launch", "emperor", "fable", "harmony", "chariot", "land"]
+CATALYST_ARC_18 = ["launch", "emperor", "fable", "harmony", "chariot", "moon", "land"]
+# Resonance threshold for the moon_18 ascension route — symbolic gate.
+MOON_ASCENSION_MIN_RESONANCE = 0.0  # informational only, engine does not gate
 
 
 @dataclass
