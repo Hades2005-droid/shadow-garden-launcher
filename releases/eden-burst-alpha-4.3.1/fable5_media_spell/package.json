@@ -1,0 +1,13 @@
+{
+  "name": "fable5-media-spell",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Approval-gated Fable5 media spell compiler + local iPhone bridge diagnostics",
+  "scripts": {
+    "test": "node --test test/fable5MediaSpell.test.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
