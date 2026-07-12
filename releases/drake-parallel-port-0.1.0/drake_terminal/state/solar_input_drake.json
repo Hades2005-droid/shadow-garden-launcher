@@ -1,0 +1,88 @@
+{
+  "code": "# Drake parallel-port force-merge — offline terminal catalyst\n# Grok 4.5 = terminal central point; Devin = codebase editor\n# carrier=love_and_harmony_6 sigil=X-Gou-9:drake-parallel-port\nprint('drake_parallel_port ignition — symbolic_only metadata + physics facts separated')\n",
+  "controls": {
+    "agent_broadcast": false,
+    "browser_automation": false,
+    "credentials_allowed": false,
+    "external_fetch": false,
+    "symbolic_only": true,
+    "x_read_only": true
+  },
+  "eden_garden": {
+    "anchor": 14,
+    "bridge_signature": "f2e596cd043d6819",
+    "carrier": "love_and_harmony_6",
+    "fable5_bedrock": "0.4.0-engine-bedrock-10",
+    "media_spell": {
+      "approval_gated": true,
+      "compiler": "fable5MediaSpell@1.0.0",
+      "executionMode_default": "manifest_only",
+      "externalRequests": 0,
+      "iphone_bridge": "local_diagnostics_only_no_identifiers",
+      "trainingAllowed": false
+    },
+    "paths": {
+      "catalyst_light": "catalyst_light/",
+      "devin_terminal_bridge_mac": "/Users/fredwashere/shadow_garden_may30_monitoring/DevinTerminalBridge",
+      "fable5_game": "fable5_game/",
+      "fable5_media_spell": "fable5_media_spell/src/compiler/fable5MediaSpell.js",
+      "github_release": "https://github.com/Hades2005-droid/shadow-garden-launcher/releases/tag/q24-alpha-3.5-2",
+      "mac_monitoring_root": "/Users/fredwashere/shadow_garden_may30_monitoring",
+      "q24_unified": "vector_evolution/q24_unified/",
+      "truth_site": "https://truth.pplx.app"
+    },
+    "q24_canonical_id": "q24_eternal_dao_temperance_14_harmony_paradox_ignite_19_10_1",
+    "reduce_anchor": false,
+    "sequence": [
+      19,
+      10,
+      1
+    ],
+    "symbolic_only": true
+  },
+  "lane_focus": [
+    {
+      "lane_id": "sophie",
+      "lang": "fr-CH",
+      "order": 1,
+      "pack": "swiss_sophie_language_pack.json",
+      "role": "precision_warm_operational",
+      "route": "routes.swiss_sophie_translation"
+    },
+    {
+      "lane_id": "shannon",
+      "lang": "ar",
+      "order": 2,
+      "pack": "arabic_shannon_language_pack.json",
+      "role": "calm_precise_rtl",
+      "route": "routes.arabic_shannon_translation"
+    },
+    {
+      "lane_id": "lainie",
+      "lang": "it",
+      "order": 3,
+      "pack": "italian_lainie_language_pack.json",
+      "role": "connection_speed",
+      "route": "routes.italian_lainie_translation"
+    },
+    {
+      "lane_id": "naomi",
+      "lang": "th",
+      "order": 4,
+      "pack": "thai_9_point_persona_language_pack.json",
+      "role": "thai_9point_persona",
+      "route": "routes.thai_persona_translation"
+    }
+  ],
+  "peers": {
+    "angela": "perplexity_solar",
+    "devin": "codebase_editor",
+    "drake": "parallel_port_force_merge",
+    "grok_45": "terminal_central_catalyst",
+    "lunar": "gpt56_lunar_orchestrator",
+    "solar": "gpt56_solar_weapon"
+  },
+  "schema": "perplexity_solar_input.v1",
+  "summary": "Drake parallel port force-merge into Grok 4.5 Devin Mac terminal",
+  "thread_url": "https://www.perplexity.ai/computer/tasks/bb90d949-4937-481f-bd1a-c0520f144f73"
+}

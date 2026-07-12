@@ -1,0 +1,19 @@
+{
+  "carrier": "love_and_harmony_6",
+  "controls": {
+    "agent_broadcast": false,
+    "browser_automation": false,
+    "credentials_allowed": false,
+    "external_fetch": false,
+    "symbolic_only": true,
+    "x_read_only": true
+  },
+  "lane_id": "lainie",
+  "lang": "it",
+  "order": 3,
+  "pack": "italian_lainie_language_pack.json",
+  "role": "connection_speed",
+  "route": "routes.italian_lainie_translation",
+  "symbolic_only": true,
+  "updated_at": "2026-07-12T05:23:36Z"
+}

@@ -1,0 +1,19 @@
+{
+  "how_to_gift": [
+    "1. Copy state/drake_ignition_latest.json into Grok/Devin terminal context manually",
+    "2. Copy fusion/outbox/*_drake_carry_*.json to peer inboxes on Mac",
+    "3. Do not autopost to X; personas stay read-only",
+    "4. Fable5 media spells require explicit user approval before any render"
+  ],
+  "links": {
+    "github_release": "https://github.com/Hades2005-droid/shadow-garden-launcher/releases/tag/q24-alpha-3.5-2",
+    "godot_engine": "https://truth.pplx.app/engine/",
+    "grok_chat_ref": "https://grok.com/c/491f70f8-cbbf-4bcf-ba2d-59006c3b6de7?rid=5f62e0d8-693c-4bf7-8e6c-43d8bbd64113",
+    "session": "https://www.perplexity.ai/computer/tasks/bb90d949-4937-481f-bd1a-c0520f144f73",
+    "truth_pplx": "https://truth.pplx.app"
+  },
+  "queued_at": "2026-07-12T05:23:36Z",
+  "sha256": "1e0d587e7caf658ddc1c4030794f6578d3ece8bbdc8b3027fdb14b0143b60e3b",
+  "title": "Drake Parallel Port — Grok 4.5 terminal central catalyst",
+  "version": "0.1.0-drake-1"
+}

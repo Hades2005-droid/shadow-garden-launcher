@@ -1,0 +1,19 @@
+{
+  "carrier": "love_and_harmony_6",
+  "controls": {
+    "agent_broadcast": false,
+    "browser_automation": false,
+    "credentials_allowed": false,
+    "external_fetch": false,
+    "symbolic_only": true,
+    "x_read_only": true
+  },
+  "lane_id": "naomi",
+  "lang": "th",
+  "order": 4,
+  "pack": "thai_9_point_persona_language_pack.json",
+  "role": "thai_9point_persona",
+  "route": "routes.thai_persona_translation",
+  "symbolic_only": true,
+  "updated_at": "2026-07-12T05:23:36Z"
+}

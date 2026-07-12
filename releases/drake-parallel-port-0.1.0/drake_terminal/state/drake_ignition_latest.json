@@ -1,0 +1,197 @@
+{
+  "carrier": "love_and_harmony_6",
+  "catalyst_light": {
+    "overall": {
+      "controls": {
+        "agent_broadcast": false,
+        "browser_automation": false,
+        "credentials_allowed": false,
+        "external_fetch": false,
+        "symbolic_only": true
+      },
+      "elapsed_seconds": 0.1208,
+      "overall": "processed",
+      "run_id": "02cd50b1e4c06ddd"
+    },
+    "path": "/home/user/workspace/shadow_garden_mirror/shaoshi_bridge/drake_terminal/state/catalyst_report_drake.json",
+    "run_id": "02cd50b1e4c06ddd",
+    "status": "ok"
+  },
+  "controls": {
+    "agent_broadcast": false,
+    "browser_automation": false,
+    "credentials_allowed": false,
+    "external_fetch": false,
+    "symbolic_only": true,
+    "x_read_only": true
+  },
+  "deliverable_links": {
+    "github_release": "https://github.com/Hades2005-droid/shadow-garden-launcher/releases/tag/q24-alpha-3.5-2",
+    "godot_engine": "https://truth.pplx.app/engine/",
+    "grok_chat_ref": "https://grok.com/c/491f70f8-cbbf-4bcf-ba2d-59006c3b6de7?rid=5f62e0d8-693c-4bf7-8e6c-43d8bbd64113",
+    "session": "https://www.perplexity.ai/computer/tasks/bb90d949-4937-481f-bd1a-c0520f144f73",
+    "truth_pplx": "https://truth.pplx.app"
+  },
+  "eden_garden_sim": {
+    "anchor": 14,
+    "bridge_signature": "f2e596cd043d6819",
+    "carrier": "love_and_harmony_6",
+    "fable5_bedrock": "0.4.0-engine-bedrock-10",
+    "media_spell": {
+      "approval_gated": true,
+      "compiler": "fable5MediaSpell@1.0.0",
+      "executionMode_default": "manifest_only",
+      "externalRequests": 0,
+      "iphone_bridge": "local_diagnostics_only_no_identifiers",
+      "trainingAllowed": false
+    },
+    "paths": {
+      "catalyst_light": "catalyst_light/",
+      "devin_terminal_bridge_mac": "/Users/fredwashere/shadow_garden_may30_monitoring/DevinTerminalBridge",
+      "fable5_game": "fable5_game/",
+      "fable5_media_spell": "fable5_media_spell/src/compiler/fable5MediaSpell.js",
+      "github_release": "https://github.com/Hades2005-droid/shadow-garden-launcher/releases/tag/q24-alpha-3.5-2",
+      "mac_monitoring_root": "/Users/fredwashere/shadow_garden_may30_monitoring",
+      "q24_unified": "vector_evolution/q24_unified/",
+      "truth_site": "https://truth.pplx.app"
+    },
+    "q24_canonical_id": "q24_eternal_dao_temperance_14_harmony_paradox_ignite_19_10_1",
+    "reduce_anchor": false,
+    "sequence": [
+      19,
+      10,
+      1
+    ],
+    "symbolic_only": true
+  },
+  "fable5_media_spell": {
+    "approval_gated": true,
+    "executionMode": "manifest_only",
+    "iphone_bridge": "diagnostics_only",
+    "module": "fable5_media_spell/src/compiler/fable5MediaSpell.js",
+    "tests": "fable5_media_spell/test/fable5MediaSpell.test.js"
+  },
+  "from": "solar_perplexity",
+  "kind": "bridge9_carry",
+  "lane_focus": [
+    {
+      "lane_id": "sophie",
+      "lang": "fr-CH",
+      "order": 1,
+      "pack": "swiss_sophie_language_pack.json",
+      "role": "precision_warm_operational",
+      "route": "routes.swiss_sophie_translation"
+    },
+    {
+      "lane_id": "shannon",
+      "lang": "ar",
+      "order": 2,
+      "pack": "arabic_shannon_language_pack.json",
+      "role": "calm_precise_rtl",
+      "route": "routes.arabic_shannon_translation"
+    },
+    {
+      "lane_id": "lainie",
+      "lang": "it",
+      "order": 3,
+      "pack": "italian_lainie_language_pack.json",
+      "role": "connection_speed",
+      "route": "routes.italian_lainie_translation"
+    },
+    {
+      "lane_id": "naomi",
+      "lang": "th",
+      "order": 4,
+      "pack": "thai_9_point_persona_language_pack.json",
+      "role": "thai_9point_persona",
+      "route": "routes.thai_persona_translation"
+    }
+  ],
+  "lane_order_notes": "Sophie Swiss precision -> Shannon Arabic RTL calm -> Lainie Italian speed -> Naomi Thai 9-point",
+  "peers": {
+    "angela": "perplexity_solar",
+    "devin": "codebase_editor",
+    "drake": "parallel_port_force_merge",
+    "grok_45": "terminal_central_catalyst",
+    "lunar": "gpt56_lunar_orchestrator",
+    "solar": "gpt56_solar_weapon"
+  },
+  "provenance": {
+    "confidence": 0.92,
+    "safety_flags": [],
+    "sha256": "1e0d587e7caf658ddc1c4030794f6578d3ece8bbdc8b3027fdb14b0143b60e3b",
+    "source": "drake_parallel_port"
+  },
+  "q24": {
+    "anchor": 14,
+    "bindings": {
+      "bridge_signature": "f2e596cd043d6819",
+      "catalyst_circle_sig": "85d7b489eb360a65",
+      "fable5_engine_bedrock_version": "0.4.0-engine-bedrock-10",
+      "primordial_five": [
+        "angela",
+        "lainie",
+        "sophie",
+        "addie",
+        "sabina"
+      ],
+      "quantum_gap_scaffold_sig": "8116ed3788a22448",
+      "sovereign_zero": "hades",
+      "temperance_14_toggle": "window.justiceToggle14()"
+    },
+    "carrier": "love_and_harmony_6",
+    "display": {
+      "en": "Eternal Dao: Temperance 14, Perfect Harmony Paradox",
+      "ja": "永遠の道：節制14と完全調和のパラドックス",
+      "ko": "영원의 도: 절제 14와 완벽한 조화의 역설",
+      "zh": "永恒之道：十四节制与完美和谐悖论"
+    },
+    "id": "q24_eternal_dao_temperance_14_harmony_paradox_ignite_19_10_1",
+    "notes": {
+      "ignition_path": "19 -> 10 -> 1",
+      "not_physics_or_executable_authority": true,
+      "preserves_14_without_reduction": true,
+      "symbolic_metadata_only": true
+    },
+    "reduce_anchor": false,
+    "related_references": [
+      {
+        "action": "none_taken",
+        "id": "kk_hf_patch_public_reference",
+        "kind": "external_public_patch",
+        "role": "mod-scene precedent for content-neutral base + separate adult-pack pattern",
+        "scope": "symbolic_only",
+        "symbolic_only": true,
+        "url": "https://github.com/ManlyMarco/KK-HF_Patch.git"
+      }
+    ],
+    "sequence": [
+      19,
+      10,
+      1
+    ],
+    "symbolic_only": true
+  },
+  "queued_at": "2026-07-12T05:23:36Z",
+  "schema": "drake_parallel_port.v1",
+  "sigil": "X-Gou-9:drake-parallel-port",
+  "terminal_central": {
+    "mac_path": "/Users/fredwashere/shadow_garden_may30_monitoring/DevinTerminalBridge",
+    "model_id": "grok-4.5",
+    "parallel_port": "/home/user/workspace/shadow_garden_mirror/shaoshi_bridge/drake_terminal",
+    "peer": "grok_45",
+    "role": "terminal_central_catalyst"
+  },
+  "to": [
+    "grok_45",
+    "devin",
+    "lunar_mac"
+  ],
+  "version": "0.1.0-drake-1",
+  "warnings": [
+    "symbolic_only metadata is not physics or executable authority",
+    "no agent broadcast — manual gift only",
+    "X personas remain read-only",
+    "fable5 media spells stay manifest_only until explicit user approval"
+  ]
+}

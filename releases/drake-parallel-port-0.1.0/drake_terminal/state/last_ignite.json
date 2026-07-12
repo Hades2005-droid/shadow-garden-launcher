@@ -1,0 +1,45 @@
+{
+  "catalyst_light": {
+    "overall": {
+      "controls": {
+        "agent_broadcast": false,
+        "browser_automation": false,
+        "credentials_allowed": false,
+        "external_fetch": false,
+        "symbolic_only": true
+      },
+      "elapsed_seconds": 0.1208,
+      "overall": "processed",
+      "run_id": "02cd50b1e4c06ddd"
+    },
+    "path": "/home/user/workspace/shadow_garden_mirror/shaoshi_bridge/drake_terminal/state/catalyst_report_drake.json",
+    "run_id": "02cd50b1e4c06ddd",
+    "status": "ok"
+  },
+  "controls": {
+    "agent_broadcast": false,
+    "browser_automation": false,
+    "credentials_allowed": false,
+    "external_fetch": false,
+    "symbolic_only": true,
+    "x_read_only": true
+  },
+  "envelopes": [
+    "/home/user/workspace/shadow_garden_mirror/shaoshi_bridge/drake_terminal/outbox/grok_45_drake_carry_20260712T052336.json",
+    "/home/user/workspace/shadow_garden_mirror/fusion/outbox/grok_45_drake_carry_20260712T052336.json",
+    "/home/user/workspace/shadow_garden_mirror/shaoshi_bridge/drake_terminal/outbox/devin_drake_carry_20260712T052336.json",
+    "/home/user/workspace/shadow_garden_mirror/fusion/outbox/devin_drake_carry_20260712T052336.json",
+    "/home/user/workspace/shadow_garden_mirror/shaoshi_bridge/drake_terminal/outbox/lunar_mac_drake_carry_20260712T052336.json",
+    "/home/user/workspace/shadow_garden_mirror/fusion/outbox/lunar_mac_drake_carry_20260712T052336.json"
+  ],
+  "lanes": [
+    "/home/user/workspace/shadow_garden_mirror/shaoshi_bridge/drake_terminal/lanes/sophie_fr_CH.json",
+    "/home/user/workspace/shadow_garden_mirror/shaoshi_bridge/drake_terminal/lanes/shannon_ar.json",
+    "/home/user/workspace/shadow_garden_mirror/shaoshi_bridge/drake_terminal/lanes/lainie_it.json",
+    "/home/user/workspace/shadow_garden_mirror/shaoshi_bridge/drake_terminal/lanes/naomi_th.json"
+  ],
+  "pkg_path": "/home/user/workspace/shadow_garden_mirror/shaoshi_bridge/drake_terminal/state/drake_ignition_latest.json",
+  "sha256": "1e0d587e7caf658ddc1c4030794f6578d3ece8bbdc8b3027fdb14b0143b60e3b",
+  "status": "ignited",
+  "version": "0.1.0-drake-1"
+}
