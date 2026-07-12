@@ -31,11 +31,14 @@ import hmac
 import json
 import os
 import socket
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
 HERE = Path(__file__).resolve().parent
+if str(HERE) not in sys.path:
+    sys.path.insert(0, str(HERE))
 STATE = HERE / "state"
 OUTBOX = HERE / "outbox"
 SOURCE = HERE / "orchestrator_source.json"
@@ -524,6 +527,14 @@ def main(argv: list[str] | None = None) -> int:
     pr.add_argument("--no-probe", action="store_true")
     pr.add_argument("--now", default=None)
 
+    sub.add_parser("personas", help="print the deterministic persona registry")
+
+    pc = sub.add_parser("classify", help="classify 9-point telemetry (provenance/evidence only)")
+    pc.add_argument("--file", default="", help="telemetry JSON file ({\"records\": [...]}); stdin if omitted")
+
+    pw = sub.add_parser("workflow", help="reference-only workflow metadata for a medium")
+    pw.add_argument("--medium", default="image", choices=sorted(SUPPORTED_MEDIA))
+
     sub.add_parser("self-test", help="run deterministic self-tests")
 
     args = parser.parse_args(argv)
@@ -554,6 +565,28 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "run":
         payload = {"spell": args.spell, "medium": args.medium} if args.spell else None
         _emit(run(payload, probe=not args.no_probe, ts=args.now))
+        return 0
+
+    if args.command == "personas":
+        import persona_pipeline as pp
+        _emit(pp.build_registry())
+        return 0
+
+    if args.command == "classify":
+        import persona_pipeline as pp
+        if args.file:
+            payload = load_json(Path(args.file), {})
+        else:
+            try:
+                payload = json.loads(sys.stdin.read() or "{}")
+            except json.JSONDecodeError:
+                payload = {}
+        _emit(pp.classify_telemetry(payload if isinstance(payload, dict) else {}))
+        return 0
+
+    if args.command == "workflow":
+        import persona_pipeline as pp
+        _emit(pp.workflow_reference(args.medium))
         return 0
 
     if args.command == "self-test":
@@ -654,7 +687,20 @@ def run_self_test() -> dict[str, Any]:
         raise RuntimeError("credential echo: key leaked into manifest")
     checks.append("hmac_sign_no_key_echo")
 
-    return {"ok": True, "tests": len(checks), "checks": checks, "version": VERSION}
+    # Persona pipeline + 9-point telemetry classifier self-checks.
+    import persona_pipeline as pp
+    persona_result = pp.run_self_test()
+    if not persona_result["ok"]:
+        raise RuntimeError("persona pipeline self-test failed")
+    checks.append("persona_pipeline_ok")
+
+    return {
+        "ok": True,
+        "tests": len(checks),
+        "checks": checks,
+        "persona_pipeline": persona_result,
+        "version": VERSION,
+    }
 
 
 if __name__ == "__main__":

@@ -63,6 +63,28 @@ Every manifest carries two strictly separated namespaces:
 
 Tests assert the namespaces never merge.
 
+## Persona pipeline & 9-point telemetry
+
+`persona_pipeline.py` adds a deterministic, network-free registry + classifier
+that reuses the orchestrator's controls/hashing/signing. Full contract in
+`PERSONA_CONTRACT.md`. Operational summary:
+
+- `orchestrator.py personas` — signed registry: every persona node discovered in
+  repo config is preserved (provenance recorded in `personas_source.json`), and
+  `minnie`/`sarah`/`sophie` are guaranteed. `biography` is always `null` and
+  `relationships` always `[]`; `registry_guarantees_hold()` fails otherwise.
+- `orchestrator.py classify --file t.json` — ranks records by provenance +
+  verifiable, de-duplicated, trusted evidence only. Prohibited flags
+  (`real_person_likeness`/`credential`/`conflict`) force `quarantine`.
+  `external_pointer` evidence is never trusted. Symbolic/character labels are
+  copied to `symbolic_labels` and ignored for ranking.
+- `orchestrator.py workflow --medium <image|video|audio>` — reference-only
+  metadata; `review_workflow()` executes nothing and only reaches
+  `local_queue_pending_user_run` when every node is allowlisted, all hosts are
+  loopback, no download is requested, the workflow is reviewed, and approve=true.
+- X.com / Twitter / Instagram links are opaque read-only pointers; every social
+  action (scrape/fetch/post/like/reply/follow/dm/credential_use) is hard-false.
+
 ## Signing / handoff
 
 - Every manifest is `sha256`-hashed under `signature.sha256`.
@@ -76,7 +98,7 @@ Tests assert the namespaces never merge.
 ```bash
 cd releases/fable5-comfyui-open-orchestrator-0.1.0
 python3 orchestrator.py self-test
-python3 -m unittest test_orchestrator -v
+python3 -m unittest test_orchestrator test_persona_pipeline -v
 python3 orchestrator.py run --no-probe
 ```
 

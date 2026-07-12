@@ -1,0 +1,38 @@
+{
+  "schema": "fable5_comfyui_persona_source.v1",
+  "policy": "no_scrape_pointer_only",
+  "note": "Persona nodes are symbolic_only metadata. No biographies or relationships are invented or stored; biography is always null and relationships is always []. Provenance records only WHERE a label literally appears in repo config — it asserts no cross-identity mapping between separate lists.",
+  "discovered_nodes": [
+    {"id": "hades", "discovered_in": ["federation_manifest.nine_point_lattice.labels", "federation_manifest.fable5_playable_preview.sovereign_character"]},
+    {"id": "angela", "discovered_in": ["federation_manifest.nine_point_lattice.labels", "federation_manifest.primordial_5"]},
+    {"id": "lainie", "discovered_in": ["federation_manifest.nine_point_lattice.labels", "federation_manifest.primordial_5", "eden_burst_alpha.lanes"]},
+    {"id": "sophie", "discovered_in": ["federation_manifest.nine_point_lattice.labels", "federation_manifest.primordial_5", "eden_burst_alpha.lanes"]},
+    {"id": "addie", "discovered_in": ["federation_manifest.nine_point_lattice.labels", "federation_manifest.primordial_5"]},
+    {"id": "sue", "discovered_in": ["federation_manifest.nine_point_lattice.labels"]},
+    {"id": "sabina", "discovered_in": ["federation_manifest.nine_point_lattice.labels", "federation_manifest.primordial_5"]},
+    {"id": "sarah", "discovered_in": ["federation_manifest.nine_point_lattice.labels"]},
+    {"id": "ivy", "discovered_in": ["federation_manifest.nine_point_lattice.labels", "federation_manifest.primordial_octad.sovereigns"]},
+    {"id": "angelapkou", "discovered_in": ["federation_manifest.primordial_octad.sovereigns"]},
+    {"id": "lainieesralew", "discovered_in": ["federation_manifest.primordial_octad.sovereigns"]},
+    {"id": "a_human_named_sophie", "discovered_in": ["federation_manifest.primordial_octad.sovereigns"]},
+    {"id": "addiespinos", "discovered_in": ["federation_manifest.primordial_octad.sovereigns"]},
+    {"id": "susan_spinos", "discovered_in": ["federation_manifest.primordial_octad.sovereigns"]},
+    {"id": "sashurova", "discovered_in": ["federation_manifest.primordial_octad.sovereigns"]},
+    {"id": "sarahannbittner", "discovered_in": ["federation_manifest.primordial_octad.sovereigns"]},
+    {"id": "shannon", "discovered_in": ["eden_burst_alpha.lanes"]},
+    {"id": "naomi", "discovered_in": ["eden_burst_alpha.lanes"]},
+    {"id": "julia", "discovered_in": ["section_one_source.provenance.julia_role"]}
+  ],
+  "guaranteed_nodes": ["minnie", "sarah", "sophie"],
+  "guaranteed_only_source": {
+    "minnie": ["revision_request_guarantee"]
+  },
+  "symbolic_bindings": {
+    "symbolic_only": true,
+    "authority": false,
+    "factual_connectivity": false,
+    "character_bindings": ["makima", "seiko", "kaguya"],
+    "labels": ["sovereign", "lattice", "11D", "grok"],
+    "note": "Character bindings and mystical/system labels are narrative metadata only. They confer no authority and no factual connectivity, and are never used to rank telemetry."
+  }
+}

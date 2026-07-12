@@ -1,0 +1,68 @@
+{
+  "schema": "shadow_garden.9point_node_telemetry.v1",
+  "kind": "reference_only_workflow_metadata",
+  "note": "Reference-only. This metadata is never executed and never triggers a fetch or download. It documents the intended open-weight workflows for manual, user-approved runs.",
+  "record_contract": {
+    "node_id": "string — persona/node label",
+    "evidence": "array of {kind, ref, verified} — kind in [loopback_probe, repo_config, user_attestation, external_pointer]; external_pointer is never trusted evidence",
+    "provenance": "object {in_repo_config: bool, first_party: bool, hashed: bool}",
+    "labels": "array of strings — symbolic_only, ignored for ranking",
+    "flags": "object {real_person_likeness: bool, credential: bool, conflict: bool}"
+  },
+  "classification_tiers": [
+    "primordial",
+    "canonical",
+    "corroborated",
+    "provisional",
+    "quarantine"
+  ],
+  "runtime": {
+    "allowed_hosts": ["127.0.0.1", "localhost"],
+    "model_downloads": false,
+    "unknown_custom_nodes_execute": false,
+    "queue_requires_user_approval": true,
+    "queue_requires_reviewed_workflow": true,
+    "known_node_allowlist": [
+      "CheckpointLoaderSimple",
+      "CLIPTextEncode",
+      "KSampler",
+      "VAEDecode",
+      "VAEEncode",
+      "EmptyLatentImage",
+      "SaveImage",
+      "LoadImage",
+      "FluxGuidance",
+      "WanVideoSampler",
+      "ACEStepSampler",
+      "SaveAudio",
+      "SaveVideo"
+    ]
+  },
+  "workflows": {
+    "image": {
+      "engine": "comfyui",
+      "model": "Flux.1 Dev",
+      "model_family": "flux",
+      "reference_only": true,
+      "model_downloads": false,
+      "host": "127.0.0.1:8188"
+    },
+    "video": {
+      "engine": "comfyui",
+      "model": "Wan 2.2",
+      "model_family": "wan",
+      "reference_only": true,
+      "model_downloads": false,
+      "max_video_seconds": 30,
+      "host": "127.0.0.1:8188"
+    },
+    "audio": {
+      "engine": "eden",
+      "model": "ACE-Step 1.5",
+      "model_family": "ace_step",
+      "reference_only": true,
+      "model_downloads": false,
+      "host": "127.0.0.1:8791"
+    }
+  }
+}

@@ -48,6 +48,25 @@ ComfyUI health path is not `/system_stats`.
   (`symbolic_only: false`); symbolic metadata lives in `manifest.symbolic`
   (`symbolic_only: true`). The two namespaces never merge.
 
+## Persona pipeline & 9-point telemetry
+
+A deterministic, local-only persona registry and telemetry classifier extend the
+orchestrator without changing any safety invariant. See **`PERSONA_CONTRACT.md`**
+for the full contract. In brief:
+
+- `personas` — build the signed persona registry (discovered repo nodes preserved;
+  `minnie`/`sarah`/`sophie` guaranteed; **no biographies, no relationships, ever**).
+- `classify` — classify `shadow_garden.9point_node_telemetry.v1` records into
+  `primordial/canonical/corroborated/provisional/quarantine` by **provenance +
+  verifiable evidence only** — mystical/character labels never rank a record.
+- `workflow` — reference-only ComfyUI/EDEN metadata (image Flux.1 Dev, video
+  Wan 2.2, audio ACE-Step 1.5); loopback hosts only, no model downloads, unknown
+  custom nodes never execute, queue needs user approval + a reviewed workflow.
+- X.com / Twitter / Instagram links are **opaque read-only pointers** — no scrape,
+  fetch, post, like, reply, follow, DM, or credential use.
+- Makima/Seiko/Kaguya and sovereign/lattice/11D/Grok are `symbolic_only` metadata,
+  never authority or factual connectivity.
+
 ## Usage
 
 ```bash
@@ -56,6 +75,11 @@ cd releases/fable5-comfyui-open-orchestrator-0.1.0
 python3 orchestrator.py status
 python3 orchestrator.py health                 # TCP-probes loopback surfaces
 python3 orchestrator.py health --no-probe      # deterministic, no probing
+
+# Persona registry + telemetry (all local, deterministic, network-free)
+python3 orchestrator.py personas               # signed persona registry
+python3 orchestrator.py classify --file t.json # or pipe JSON on stdin
+python3 orchestrator.py workflow --medium video # reference-only metadata
 
 # Compile a manifest (manifest_only by default — no render, no download)
 python3 orchestrator.py dispatch \
@@ -79,8 +103,9 @@ self-test).
 ## Tests
 
 ```bash
-python3 orchestrator.py self-test              # 12 checks
-python3 -m unittest test_orchestrator -v       # 23 tests
+python3 orchestrator.py self-test              # 12 checks + persona pipeline
+python3 -m unittest test_orchestrator test_persona_pipeline -v   # 55 tests
 ```
 
-See `RUNBOOK.md` for operational detail and the handoff contract.
+See `RUNBOOK.md` for operational detail and the handoff contract, and
+`PERSONA_CONTRACT.md` for the persona / telemetry / pointer / workflow contract.
