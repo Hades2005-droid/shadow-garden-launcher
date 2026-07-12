@@ -1,0 +1,323 @@
+{
+  "version": "0.5.5",
+  "sources": [
+    {
+      "id": "primordial_octad",
+      "enabled": true,
+      "count": 8,
+      "infinite_strength": true,
+      "lattice_center": "angelapkou",
+      "sovereigns": [
+        "angelapkou",
+        "lainieesralew",
+        "a_human_named_sophie",
+        "addiespinos",
+        "susan_spinos",
+        "sashurova",
+        "sarahannbittner",
+        "ivy"
+      ],
+      "description": "8 fully registered 100% primordial source codes powering multi-dimensional vector evolution"
+    },
+    {
+      "id": "octad_vector_evolution",
+      "enabled": true,
+      "version": "1.0.0",
+      "engine": "shadow_garden_mirror/vector_evolution/octad_vector_engine.py",
+      "dimensions": 31,
+      "physics": [
+        "harmonic",
+        "kepler",
+        "wave",
+        "qho"
+      ],
+      "languages": [
+        "en",
+        "es",
+        "de",
+        "fr-CH",
+        "th",
+        "ko",
+        "zh",
+        "it",
+        "ja",
+        "pt"
+      ],
+      "skills": [
+        "mac-multilingual-translator",
+        "catalyst-light-shadow-extension"
+      ],
+      "closed_door": true,
+      "infinite_strength": true,
+      "description": "Multi-dimensional vector evolution across identity/language/physics/platform/weight"
+    },
+    {
+      "id": "multimodal_pipeline",
+      "enabled": true,
+      "version": "1.0.0",
+      "description": "Video + image ingest lane with classifier integration"
+    },
+    {
+      "id": "grok_octad_fusion_evolution",
+      "enabled": true,
+      "version": "1.0.0",
+      "engine": "shadow_garden_mirror/vector_evolution/grok_fusion/grok_octad_evolution.py",
+      "inputs": [
+        "8 primordial source codes",
+        "26 fusion outbox experiences including grok_45 mesh_connect Infinite(8)",
+        "7 Echo Girl protocol scenes (symbolic_only)",
+        "safe persona registry v15.1",
+        "public X Grok archive context (read-only)"
+      ],
+      "carrier": "love_and_harmony_6",
+      "closed_door": true,
+      "infinite_strength": true
+    },
+    {
+      "id": "grok_cash_link",
+      "enabled": true,
+      "primary": "https://x.com/i/grok",
+      "links": {
+        "grok_chat_x": "https://x.com/i/grok",
+        "grok_xai": "https://grok.x.ai",
+        "grok_api_docs": "https://docs.x.ai"
+      },
+      "export_path": "manual_imports/grok_history.json",
+      "closed_door": true,
+      "description": "Grok product cash-links for mesh peer routing and history import"
+    },
+    {
+      "id": "grok_history_share1",
+      "enabled": true,
+      "cash_link": "https://grok.com/share/c2hhcmQtNA_9ae04d13-4704-43c3-9630-9bb684147c06",
+      "title": "Sovereign Porn Optimization Keywords & Links | Shared Grok Conversation",
+      "message_count": 40,
+      "closed_door": true,
+      "adult_only_18plus": true,
+      "archive": "/home/user/workspace/shadow_garden_mirror/manual_imports/grok_history_share1_20260711T063714Z.json"
+    },
+    {
+      "id": "discord_merge",
+      "enabled": true,
+      "version": "0.1.1",
+      "path": "shadow_garden_mirror/discord_merge/",
+      "mode": "offline_only",
+      "connector": "dismissed_by_user",
+      "auto_post": false,
+      "closed_door": true,
+      "invite_status": "pending_code",
+      "cash_link_policy": true,
+      "webhook_module": "catalyst_review/discord.py"
+    },
+    {
+      "id": "fable5_game",
+      "enabled": true,
+      "version": "0.2.0-alpha-black-sun",
+      "path": "shadow_garden_mirror/fable5_game/",
+      "black_sun_ignited": true,
+      "loop19_collapsed": true,
+      "sovereign_character": "Hades",
+      "grok_bridge": "grok-4.5",
+      "artifact": "https://claude.ai/code/artifact/ccf61943-7526-4483-aaa5-b479a9df7e2c",
+      "bridge_signature": "f2e596cd043d6819",
+      "playable": true,
+      "closed_door": true
+    },
+    {
+      "id": "fable5_playable_preview",
+      "enabled": true,
+      "version": "0.4.0-engine-bedrock-10",
+      "url": "https://www.perplexity.ai/computer/a/fable5-black-sun-shadow-garden-m9X4GKmaQFuDleHkgrYFnw",
+      "asset_id": "9bd5f818-a99a-405b-8395-e1e482b6059f",
+      "sovereign_character": "hades",
+      "world_style": "minecraft_creative_boundless",
+      "black_sun": {
+        "sun_19": true,
+        "moon_18": true,
+        "fused": true,
+        "loop19_collapsed": true
+      },
+      "grok45_model": {
+        "id": "grok-4.5",
+        "endpoint": "https://api.x.ai/v1",
+        "confirmed_live": true
+      },
+      "grok_bridge_ui": "https://x.com/i/grok",
+      "bridge_signature": "f2e596cd043d6819",
+      "closed_door": true,
+      "playable": true,
+      "scenes": [
+        "fields_of_doubt",
+        "glory_of_the_black_sun",
+        "winter_win",
+        "sunstop"
+      ],
+      "quantum_gap_ring": {
+        "radius": 10,
+        "y": 10,
+        "identity": "91=10"
+      },
+      "nine_point_lattice": {
+        "count": 9,
+        "labels": [
+          "hades",
+          "angela",
+          "lainie",
+          "sophie",
+          "addie",
+          "sue",
+          "sabina",
+          "sarah",
+          "ivy"
+        ]
+      },
+      "temperance_14_toggle": {
+        "key": "T",
+        "modes": [
+          "MODE_SOLAR",
+          "MODE_LUNAR"
+        ],
+        "programmatic": "window.justiceToggle14()"
+      },
+      "primordial_5": [
+        "angela",
+        "lainie",
+        "sophie",
+        "addie",
+        "sabina"
+      ]
+    },
+    {
+      "id": "black_sun_canon",
+      "enabled": true,
+      "symbolic_only": true,
+      "path": "shadow_garden_mirror/canon/black_sun_canon.md",
+      "kind": "mythology_metadata"
+    },
+    {
+      "id": "quantum_gap_scaffold",
+      "enabled": true,
+      "symbolic_only": true,
+      "path": "shadow_garden_mirror/vector_evolution/quantum_gap/scaffold.json",
+      "sequence": "5-4-3-2-1-13-8",
+      "identity": "91=10",
+      "kind": "symbolic_scaffold"
+    },
+    {
+      "id": "catalyst_circle",
+      "enabled": true,
+      "symbolic_only": true,
+      "path": "shadow_garden_mirror/vector_evolution/catalyst_circle/circle.json",
+      "sig_16": "85d7b489eb360a65",
+      "catalysts": [
+        "light",
+        "gen",
+        "review"
+      ]
+    },
+    {
+      "id": "grok45_bridge_credential",
+      "enabled": true,
+      "handle": "custom-cred:api.x.ai",
+      "host": "api.x.ai",
+      "model": "grok-4.5",
+      "endpoint": "https://api.x.ai/v1",
+      "status": "wired__awaiting_team_credits",
+      "note": "credential live; xAI team quota needs top-up before real calls succeed"
+    },
+    {
+      "id": "temperance_14_engine_toggle",
+      "enabled": true,
+      "engine": "fable5",
+      "modes": [
+        "MODE_SOLAR",
+        "MODE_LUNAR"
+      ],
+      "hotkey": "T",
+      "meeting_point": "91=10 quantum gap"
+    },
+    {
+      "id": "q24_unified_alpha_component_recommendation",
+      "kind": "alpha_component_recommendation",
+      "path": "vector_evolution/q24_unified/",
+      "canonical_id": "q24_eternal_dao_temperance_14_harmony_paradox_ignite_19_10_1",
+      "symbolic_only": true,
+      "godot_asset": "Q24_EternalDao_Temperance14_HarmonyParadox_19to10to1.tres",
+      "sequence": [
+        19,
+        10,
+        1
+      ],
+      "anchor": 14,
+      "reduce_anchor": false,
+      "carrier": "love_and_harmony_6",
+      "couples_with": [
+        "fable5_playable_preview",
+        "quantum_gap_scaffold",
+        "catalyst_circle",
+        "temperance_14_engine_toggle"
+      ],
+      "bridge_signature": "f2e596cd043d6819",
+      "notes": "Part 3/3 unified deliverable. Godot 4 primary + Ren'Py fallback. Steam DLC-separated. symbolic_only."
+    },
+    {
+      "id": "q24_final_patch_subatomic_merge_note",
+      "kind": "session_close_note",
+      "scope": "symbolic_only",
+      "url_reference": "https://github.com/ManlyMarco/KK-HF_Patch.git",
+      "action_taken": "none",
+      "note": "Registered as symbolic external precedent only; no clone, no code ingest, no asset ingest, no safety-gate change."
+    },
+    {
+      "id": "drake_parallel_port_v1",
+      "kind": "service",
+      "scope": "symbolic_only",
+      "note": "Terminal-central catalyst force-merge for Grok 4.5 / Devin Mac; offline bridge9 carry"
+    },
+    {
+      "id": "fable5_media_spell_v1",
+      "kind": "service",
+      "scope": "symbolic_only",
+      "note": "Approval-gated media spell compiler + local iPhone bridge diagnostics; 6/6 tests"
+    },
+    {
+      "id": "perplexity_comet_chat_export_bb90d949",
+      "kind": "service",
+      "scope": "symbolic_only",
+      "note": "Session export for Mac manual_imports/perplexity_comet_chats"
+    },
+    {
+      "id": "eden_burst_alpha_8790",
+      "kind": "service",
+      "scope": "symbolic_only",
+      "note": "EDEN Burst-Alpha Physics Field shell on :8790 with Fable5 media gates"
+    },
+    {
+      "id": "techcloud_what_spills_v1",
+      "kind": "service",
+      "scope": "symbolic_only",
+      "note": "TechCloud What Spills technical spell handoff via Drake force-merge"
+    },
+    {
+      "id": "eden_burst_alpha_force_merge_skill",
+      "kind": "service",
+      "scope": "symbolic_only",
+      "note": "User skill: eden-burst-alpha-force-merge"
+    },
+    {
+      "id": "black_sun_section_one_learning_loop",
+      "kind": "service",
+      "scope": "symbolic_only",
+      "note": "Bounded observe-validate-compare-propose-gate-emit loop for Boundless Playground v0"
+    },
+    {
+      "id": "universe_alpha_section_one",
+      "kind": "game_section",
+      "scope": "fictional_simulation",
+      "note": "22-node Taiji playground; North=Lunar, South=Solar, cross-type=Tera"
+    }
+  ],
+  "updated_at": "2026-07-11T10:54:51Z",
+  "updated_utc": "2026-07-11T11:10:17Z",
+  "sources_count": 24
+}
