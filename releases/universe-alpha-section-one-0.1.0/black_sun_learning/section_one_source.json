@@ -1,0 +1,43 @@
+{
+  "schema": "universe_alpha_section_source.v1",
+  "task_id": "2366bfee-b78c-4ddc-9f86-304c30c67c4d",
+  "task_url": "https://www.perplexity.ai/computer/tasks/2366bfee-b78c-4ddc-9f86-304c30c67c4d?view=thread",
+  "thread_title": "ASUNA 0 POINT DEEP EAST GARDEN CHAMBERS",
+  "section_one": {
+    "name": "Boundless Playground v0",
+    "status": "built_preview",
+    "node_count": 22,
+    "art_direction": "east-asian ink-meets-cyber",
+    "trajectory": ["v0_party", "v1_playable", "v2_4k_universe_sim"],
+    "required_capabilities": ["taiji_router", "node_constellation_22", "fable5_adapter", "eden_shell", "black_sun_learning", "catalyst_light_validation"]
+  },
+  "routing": {
+    "north": "lunar",
+    "south": "solar",
+    "cross_type": "tera",
+    "invariant": "North->Lunar; South->Solar; cross-type/application->Tera"
+  },
+  "controls": {
+    "external_fetch": false,
+    "browser_automation": false,
+    "agent_broadcast": false,
+    "credentials_allowed": false,
+    "source_code_mutation": false,
+    "external_write": false,
+    "x_read_only": true,
+    "symbolic_only": true
+  },
+  "provenance": {
+    "catalyst_run_id": "e5e9799afdbba4e9",
+    "julia_role": "east_asia_persona_liaison",
+    "node_classification": "AUSNA_DEEP_EAST_01",
+    "federation_version_in_source": "0.4.7",
+    "grok_loopback_target": "d1f4804c-e2da-4885-9aa1-485c10f2935f"
+  },
+  "blockers": [
+    {"id": "harpa_api_key", "priority": "p2", "next_action": "Repair HARPA API key through its connector settings", "external_write": true},
+    {"id": "qdrant_cluster_url", "priority": "p2", "next_action": "Repair Qdrant cluster URL before vector persistence", "external_write": true},
+    {"id": "comfyui_mac", "priority": "p1", "next_action": "Start ComfyUI locally on the Mac and verify health", "external_write": false},
+    {"id": "fable5_launch", "priority": "p0", "next_action": "Run the Fable5 launcher and connect one spell compile to Section One", "external_write": false}
+  ]
+}

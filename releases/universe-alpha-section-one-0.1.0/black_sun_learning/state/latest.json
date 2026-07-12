@@ -1,0 +1,171 @@
+{
+  "controls": {
+    "agent_broadcast": false,
+    "browser_automation": false,
+    "credentials_allowed": false,
+    "external_fetch": false,
+    "external_write": false,
+    "source_code_mutation": false,
+    "symbolic_only": true,
+    "x_read_only": true
+  },
+  "delta": {
+    "capabilities": {
+      "black_sun_learning": true,
+      "catalyst_light_validation": true,
+      "eden_shell": true,
+      "fable5_adapter": true,
+      "node_constellation_22": true,
+      "taiji_router": true
+    },
+    "coverage": 1.0,
+    "missing": [],
+    "required": [
+      "taiji_router",
+      "node_constellation_22",
+      "fable5_adapter",
+      "eden_shell",
+      "black_sun_learning",
+      "catalyst_light_validation"
+    ]
+  },
+  "gate": {
+    "auto_safe_proposals": [
+      {
+        "action": "Start ComfyUI locally on the Mac and verify health",
+        "capability": "comfyui_mac",
+        "kind": "blocker",
+        "priority": "p1",
+        "requires_human_approval": false,
+        "route": "tera"
+      },
+      {
+        "action": "Run the Fable5 launcher and connect one spell compile to Section One",
+        "capability": "fable5_launch",
+        "kind": "blocker",
+        "priority": "p0",
+        "requires_human_approval": false,
+        "route": "tera"
+      },
+      {
+        "action": "Connect Taiji rotation, 22-node selection, and one Fable5 spell compile into a 90-second playable loop",
+        "capability": "first_playable_loop",
+        "kind": "gameplay",
+        "priority": "p0",
+        "requires_human_approval": false,
+        "route": "tera"
+      },
+      {
+        "action": "Record input seed and verify identical node routing and field state on replay",
+        "capability": "deterministic_replay",
+        "kind": "qa",
+        "priority": "p1",
+        "requires_human_approval": false,
+        "route": "north"
+      }
+    ],
+    "external_actions_executed": 0,
+    "held_for_user_approval": [
+      {
+        "action": "Repair HARPA API key through its connector settings",
+        "capability": "harpa_api_key",
+        "kind": "blocker",
+        "priority": "p2",
+        "requires_human_approval": true,
+        "route": "tera"
+      },
+      {
+        "action": "Repair Qdrant cluster URL before vector persistence",
+        "capability": "qdrant_cluster_url",
+        "kind": "blocker",
+        "priority": "p2",
+        "requires_human_approval": true,
+        "route": "tera"
+      }
+    ],
+    "source_mutations_executed": 0
+  },
+  "generated_at": "2026-07-12T06:06:45Z",
+  "observation": {
+    "files": {
+      "black_sun_canon": {
+        "bytes": 1394,
+        "path": "/home/user/workspace/shadow_garden_mirror/canon/black_sun_canon.md",
+        "present": true
+      },
+      "catalyst_light": {
+        "bytes": 10107,
+        "path": "/home/user/workspace/catalyst_light/pipeline.py",
+        "present": true
+      },
+      "drake_port": {
+        "bytes": 13538,
+        "path": "/home/user/workspace/shadow_garden_mirror/shaoshi_bridge/drake_terminal/drake_parallel_port.py",
+        "present": true
+      },
+      "eden_server": {
+        "bytes": 27576,
+        "path": "/home/user/workspace/shadow_garden_mirror/eden_burst_alpha.py",
+        "present": true
+      },
+      "fable5_game": {
+        "bytes": 10602,
+        "path": "/home/user/workspace/shadow_garden_mirror/fable5_game/web/game.js",
+        "present": true
+      }
+    },
+    "known_blockers": [
+      {
+        "external_write": true,
+        "id": "harpa_api_key",
+        "next_action": "Repair HARPA API key through its connector settings",
+        "priority": "p2"
+      },
+      {
+        "external_write": true,
+        "id": "qdrant_cluster_url",
+        "next_action": "Repair Qdrant cluster URL before vector persistence",
+        "priority": "p2"
+      },
+      {
+        "external_write": false,
+        "id": "comfyui_mac",
+        "next_action": "Start ComfyUI locally on the Mac and verify health",
+        "priority": "p1"
+      },
+      {
+        "external_write": false,
+        "id": "fable5_launch",
+        "next_action": "Run the Fable5 launcher and connect one spell compile to Section One",
+        "priority": "p0"
+      }
+    ],
+    "section_one_status": "built_preview",
+    "source_digest": "2c398deb45960ab8d76bd999ba32ae411e38af825a14efac3c6d93c9d4e28b04"
+  },
+  "routing": {
+    "cross_type": "tera",
+    "invariant": "North->Lunar; South->Solar; cross-type/application->Tera",
+    "north": "lunar",
+    "south": "solar"
+  },
+  "run_id": "918b5c282ffefb92",
+  "schema": "black_sun_learning_packet.v1",
+  "section": "universe_alpha.section_1",
+  "section_name": "Boundless Playground v0",
+  "sequence": [
+    "observe",
+    "validate",
+    "compare",
+    "propose",
+    "gate",
+    "emit"
+  ],
+  "status": "processed",
+  "task_id": "2366bfee-b78c-4ddc-9f86-304c30c67c4d",
+  "warnings": [
+    "Black Sun is symbolic_only mythology metadata, not authority",
+    "This loop does not self-modify or write to external systems",
+    "External connector actions require a separate user-authorized step"
+  ]
+}
