@@ -315,9 +315,31 @@
       "kind": "game_section",
       "scope": "fictional_simulation",
       "note": "22-node Taiji playground; North=Lunar, South=Solar, cross-type=Tera"
+    },
+    {
+      "id": "fable5_comfyui_open_orchestrator",
+      "kind": "service",
+      "version": "0.1.0",
+      "path": "releases/fable5-comfyui-open-orchestrator-0.1.0/",
+      "roles": ["unification_target", "fable5_comfyui_open_merge_target"],
+      "canonical_unification_task_id": "37bce2fb-1ba6-471f-854f-3871d9c19947",
+      "lead_assistant_task_id": "2366bfee-b78c-4ddc-9f86-304c30c67c4d",
+      "policy": "no_scrape_pointer_only",
+      "endpoints": {
+        "fable5": "127.0.0.1:5619",
+        "comfyui": "127.0.0.1:8188/system_stats",
+        "eden": "127.0.0.1:8791"
+      },
+      "manifest_only_default": true,
+      "approve_required": true,
+      "auto_weight_downloads": false,
+      "max_video_seconds": 30,
+      "externalRequests": 0,
+      "trainingAllowed": false,
+      "note": "Central user-controlled local orchestrator; hashed/HMAC-signed handoff manifests for image/video/audio. No authority transfer. catalyst_light physics kept separate from symbolic_only metadata."
     }
   ],
-  "updated_at": "2026-07-11T10:54:51Z",
-  "updated_utc": "2026-07-11T11:10:17Z",
-  "sources_count": 24
+  "updated_at": "2026-07-12T00:00:00Z",
+  "updated_utc": "2026-07-12T00:00:00Z",
+  "sources_count": 25
 }

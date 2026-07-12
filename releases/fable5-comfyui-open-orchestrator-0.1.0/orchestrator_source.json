@@ -1,0 +1,39 @@
+{
+  "schema": "fable5_comfyui_orchestrator_source.v1",
+  "canonical_unification_task_id": "37bce2fb-1ba6-471f-854f-3871d9c19947",
+  "lead_assistant_task_id": "2366bfee-b78c-4ddc-9f86-304c30c67c4d",
+  "policy": "no_scrape_pointer_only",
+  "roles": [
+    "unification_target",
+    "fable5_comfyui_open_merge_target"
+  ],
+  "endpoints": {
+    "fable5": {"host": "127.0.0.1", "port": 5619, "health_path": "/"},
+    "comfyui": {"host": "127.0.0.1", "port": 8188, "health_path": "/system_stats"},
+    "eden": {"host": "127.0.0.1", "port": 8791, "health_path": "/healthz"}
+  },
+  "media": {
+    "supported": ["image", "video", "audio"],
+    "default_mode": "manifest_only",
+    "requires_user_approval": true,
+    "max_video_seconds": 30,
+    "auto_weight_downloads": false
+  },
+  "controls": {
+    "external_fetch": false,
+    "browser_automation": false,
+    "agent_broadcast": false,
+    "credentials_allowed": false,
+    "credential_echo": false,
+    "source_code_mutation": false,
+    "external_write": false,
+    "external_connector_writes": false,
+    "x_writes": false,
+    "x_read_only": true,
+    "hidden_authority": false,
+    "real_person_likeness_engine": false,
+    "auto_weight_downloads": false,
+    "training_allowed": false,
+    "symbolic_only": true
+  }
+}

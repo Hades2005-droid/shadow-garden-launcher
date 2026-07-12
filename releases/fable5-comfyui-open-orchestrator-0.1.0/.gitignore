@@ -1,0 +1,6 @@
+state/*
+outbox/*
+!state/.gitkeep
+!outbox/.gitkeep
+__pycache__/
+*.pyc
