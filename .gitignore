@@ -7,3 +7,5 @@ voices/
 *.log
 __pycache__/
 *.pyc
+# connector bridge runtime artifact (generated, not source)
+monitors/state.json
