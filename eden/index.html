@@ -1,0 +1,617 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EDEN · Burst-Alpha Physics Field</title>
+</head>
+<body>
+<style>
+  :root {
+    color-scheme: dark;
+    --ink: #0c0b12;
+    --ink-2: #100e18;
+    --panel: #16131f;
+    --panel-2: #1d1929;
+    --line: #2a2438;
+    --line-strong: #3b3350;
+    --text: #efe9fb;
+    --muted: #9a91b4;
+    --faint: #6b6386;
+    --violet: #a970ff;
+    --magenta: #ff5db1;
+    --cyan: #4fe0e0;
+    --good: #56e39f;
+    --warn: #ffcf6b;
+    --crit: #ff6b7d;
+    --shadow: 0 1px 2px rgba(0,0,0,.5), 0 20px 60px rgba(0,0,0,.55);
+    --radius: 13px;
+    --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", "Menlo", "Consolas", monospace;
+  }
+  :root[data-theme="light"] {
+    color-scheme: light;
+    --ink: #f3f1f8; --ink-2: #ffffff; --panel: #ffffff; --panel-2: #f2eff8;
+    --line: #e3def0; --line-strong: #cfc7e4; --text: #1a1626; --muted: #6a6284;
+    --faint: #948bad; --shadow: 0 1px 2px rgba(30,20,50,.08), 0 16px 44px rgba(40,25,70,.14);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    background:
+      radial-gradient(140% 100% at 100% 0%, rgba(169,112,255,.10), transparent 55%),
+      radial-gradient(120% 90% at 0% 100%, rgba(255,93,177,.08), transparent 55%),
+      var(--ink);
+    color: var(--text);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  .app {
+    height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: clamp(12px, 1.6vw, 20px);
+    gap: 14px;
+  }
+
+  header.top { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
+  .brand { display: flex; align-items: baseline; gap: 12px; min-width: 0; }
+  .glyph {
+    width: 30px; height: 30px; border-radius: 8px; flex: none;
+    background: conic-gradient(from 210deg, var(--violet), var(--magenta), var(--violet));
+    box-shadow: 0 0 22px rgba(169,112,255,.55);
+    position: relative;
+  }
+  .glyph::after { content:""; position:absolute; inset:7px; border-radius:4px; background: var(--ink); }
+  .wordmark { display: flex; flex-direction: column; line-height: 1; }
+  .wordmark b { font-size: clamp(17px, 2.2vw, 22px); font-weight: 800; letter-spacing: -.02em; }
+  .wordmark span { font-size: 10px; letter-spacing: .34em; text-transform: uppercase; color: var(--faint); margin-top: 4px; }
+  .status-pills { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-family: var(--font-mono); font-size: 11.5px; font-weight: 600;
+    padding: 6px 11px; border-radius: 999px;
+    border: 1px solid var(--line); background: var(--panel); color: var(--muted);
+  }
+  .pill .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--good); box-shadow: 0 0 8px var(--good); }
+  .pill.live .dot { animation: pulse 1.6s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
+  .icon-btn {
+    appearance: none; border: 1px solid var(--line); background: var(--panel); color: var(--muted);
+    width: 36px; height: 36px; border-radius: 9px; cursor: pointer; display: grid; place-items: center;
+    transition: color .15s, border-color .15s, transform .1s;
+  }
+  .icon-btn:hover { color: var(--text); border-color: var(--line-strong); }
+  .icon-btn:active { transform: scale(.93); }
+  .icon-btn svg { width: 17px; height: 17px; }
+
+  .main { display: grid; grid-template-columns: minmax(0,1fr) 340px; gap: 14px; min-height: 0; }
+  @media (max-width: 1080px) { .main { grid-template-columns: 1fr; } }
+
+  .stage-wrap {
+    position: relative; border-radius: var(--radius); overflow: hidden;
+    border: 1px solid var(--line); background: #06050b; box-shadow: var(--shadow);
+    min-height: 340px; display: flex; flex-direction: column;
+  }
+  .canvas-hold { position: relative; flex: 1; min-height: 0; }
+  canvas#field { display: block; width: 100%; height: 100%; }
+
+  .overlay { position: absolute; inset: 0; pointer-events: none; font-family: var(--font-mono); }
+  .ov-corner { position: absolute; padding: 12px 14px; font-size: 11px; line-height: 1.55; color: rgba(239,233,251,.82); }
+  .ov-tl { top: 0; left: 0; }
+  .ov-tr { top: 0; right: 0; text-align: right; }
+  .ov-bl { bottom: 0; left: 0; }
+  .ov-corner .k { color: var(--faint); }
+  .ov-corner .v { color: var(--text); }
+  .ov-crosshair { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); font-size: 10px; letter-spacing: .28em; text-transform: uppercase; color: var(--faint); }
+
+  .controls {
+    display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+    padding: 11px 12px; border-top: 1px solid var(--line); background: var(--panel);
+  }
+  .ctrl { display: flex; align-items: center; gap: 9px; }
+  .ctrl label { font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); font-weight: 650; white-space: nowrap; }
+  .ctrl output { font-family: var(--font-mono); font-size: 12px; color: var(--text); min-width: 34px; text-align: right; font-variant-numeric: tabular-nums; }
+  input[type=range] {
+    -webkit-appearance: none; appearance: none; width: 92px; height: 4px; border-radius: 3px;
+    background: var(--line-strong); outline: none; cursor: pointer;
+  }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; border-radius: 50%; background: var(--violet); box-shadow: 0 0 10px rgba(169,112,255,.7); cursor: pointer; }
+  input[type=range]::-moz-range-thumb { width: 14px; height: 14px; border: 0; border-radius: 50%; background: var(--violet); box-shadow: 0 0 10px rgba(169,112,255,.7); cursor: pointer; }
+  .sep { width: 1px; align-self: stretch; background: var(--line); margin: 2px 2px; }
+  .spacer { flex: 1 1 auto; }
+  .btn {
+    appearance: none; border: 1px solid var(--line); background: var(--panel-2); color: var(--text);
+    font: inherit; font-weight: 650; font-size: 13px; padding: 8px 14px; border-radius: 9px; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 7px; transition: transform .1s, border-color .15s, background .15s;
+  }
+  .btn:hover { border-color: var(--line-strong); }
+  .btn:active { transform: scale(.96); }
+  .btn svg { width: 15px; height: 15px; }
+  .btn.primary { background: linear-gradient(120deg, var(--violet), var(--magenta)); border-color: transparent; color: #120a1c; }
+  .btn.toggle[aria-pressed="true"] { border-color: var(--violet); color: var(--violet); box-shadow: inset 0 0 0 1px var(--violet); }
+
+  .rail { display: grid; grid-template-rows: auto 1fr auto; gap: 12px; min-height: 0; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+  .card h2 {
+    margin: 0; padding: 12px 15px 0; font-size: 11px; text-transform: uppercase; letter-spacing: .18em;
+    color: var(--muted); font-weight: 700; display: flex; align-items: center; justify-content: space-between;
+  }
+  .tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border-radius: 0 0 var(--radius) var(--radius); overflow: hidden; margin-top: 12px; }
+  .tile { background: var(--panel); padding: 11px 13px; display: flex; flex-direction: column; gap: 3px; }
+  .tile .lab { font-size: 10px; text-transform: uppercase; letter-spacing: .12em; color: var(--faint); font-weight: 650; }
+  .tile .num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 19px; font-weight: 600; letter-spacing: -.01em; }
+  .tile .num small { font-size: 11px; color: var(--muted); font-weight: 500; margin-left: 2px; }
+  .tile .num.good { color: var(--good); } .tile .num.warn { color: var(--warn); } .tile .num.crit { color: var(--crit); }
+
+  .graph-card { padding: 12px 15px 14px; display: flex; flex-direction: column; gap: 10px; min-height: 0; }
+  .graph-card h2 { padding: 0; }
+  .graphs { display: flex; flex-direction: column; gap: 12px; }
+  .graph { display: flex; flex-direction: column; gap: 5px; }
+  .graph .row { display: flex; align-items: baseline; justify-content: space-between; }
+  .graph .row .t { font-size: 11px; color: var(--muted); font-weight: 600; }
+  .graph .row .r { font-family: var(--font-mono); font-size: 12px; color: var(--text); font-variant-numeric: tabular-nums; }
+  .graph canvas { width: 100%; height: 42px; display: block; border-radius: 6px; background: var(--panel-2); }
+
+  .console { display: flex; flex-direction: column; min-height: 150px; }
+  .console h2 { padding: 12px 15px; }
+  .console .log {
+    flex: 1; margin: 0; padding: 0 15px 13px; overflow: hidden;
+    font-family: var(--font-mono); font-size: 11.5px; line-height: 1.7; color: var(--muted);
+    display: flex; flex-direction: column; justify-content: flex-end;
+  }
+  .console .log .l { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .console .log .l .ts { color: var(--faint); }
+  .console .log .l .tag { color: var(--violet); }
+  .console .log .l.evt .tag { color: var(--magenta); }
+  .console .log .l.warn { color: var(--warn); }
+  .console .log .l.sys .tag { color: var(--cyan); }
+
+  .note { font-size: 11px; color: var(--faint); line-height: 1.5; padding: 0 2px; }
+  .note b { color: var(--muted); font-weight: 600; }
+
+  @media (prefers-reduced-motion: reduce) { .pill.live .dot { animation: none; } }
+</style>
+
+<div class="app">
+  <header class="top">
+    <div class="brand">
+      <div class="glyph"></div>
+      <div class="wordmark"><b>EDEN</b><span>Burst-Alpha Physics Field</span></div>
+    </div>
+    <div class="status-pills">
+      <span class="pill live"><span class="dot"></span>SIM&nbsp;LIVE</span>
+      <span class="pill" id="pillLoop"><span class="dot" style="background:var(--faint);box-shadow:none"></span>AUTO-LOOP</span>
+      <span class="pill" id="pillRt">rt&nbsp;<span id="pillRtV">1.00×</span></span>
+      <button class="icon-btn" id="themeBtn" title="Toggle theme" aria-label="Toggle theme">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"></path></svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="main">
+    <div class="stage-wrap">
+      <div class="canvas-hold">
+        <canvas id="field"></canvas>
+        <div class="overlay">
+          <div class="ov-crosshair">Ø EDEN&nbsp;FIELD · 60Hz</div>
+          <div class="ov-corner ov-tl">
+            <div><span class="k">bodies </span><span class="v" id="ovBodies">0</span></div>
+            <div><span class="k">spray  </span><span class="v" id="ovSpray">0</span></div>
+            <div><span class="k">collis </span><span class="v" id="ovColl">0</span></div>
+          </div>
+          <div class="ov-corner ov-tr">
+            <div><span class="k">KE </span><span class="v" id="ovKE">0</span></div>
+            <div><span class="k">|p|</span><span class="v" id="ovP">0</span></div>
+            <div><span class="k">v̄  </span><span class="v" id="ovV">0</span></div>
+          </div>
+          <div class="ov-corner ov-bl">
+            <div><span class="k">g </span><span class="v" id="ovG">0</span> <span class="k">wind </span><span class="v" id="ovW">0</span> <span class="k">e </span><span class="v" id="ovE">0</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <div class="ctrl"><label>Gravity</label><input id="gGrav" type="range" min="0" max="2600" value="1200"><output id="oGrav">1200</output></div>
+        <div class="ctrl"><label>Bounce</label><input id="gRest" type="range" min="0" max="100" value="82"><output id="oRest">0.82</output></div>
+        <div class="ctrl"><label>Wind</label><input id="gWind" type="range" min="-600" max="600" value="0"><output id="oWind">0</output></div>
+        <div class="ctrl"><label>Speed</label><input id="gRate" type="range" min="10" max="200" value="100"><output id="oRate">1.0×</output></div>
+        <div class="sep"></div>
+        <div class="ctrl"><label>Bodies</label><input id="gCount" type="range" min="4" max="90" value="34"><output id="oCount">34</output></div>
+        <div class="spacer"></div>
+        <button class="btn toggle" id="btnAuto" aria-pressed="false" title="Auto-recursive burst loop (A)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2v6h-6M3 12a9 9 0 0 1 15-6.7L21 8M3 22v-6h6M21 12a9 9 0 0 1-15 6.7L3 16"></path></svg>Auto
+        </button>
+        <button class="btn toggle" id="btnPause" aria-pressed="false" title="Pause (P)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="5" width="4" height="14" rx="1"></rect><rect x="14" y="5" width="4" height="14" rx="1"></rect></svg>Pause
+        </button>
+        <button class="btn" id="btnReset" title="Reset (R)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v6h6M3 8a9 9 0 1 0 3-5.6"></path></svg>Reset
+        </button>
+        <button class="btn primary" id="btnBurst" title="Trigger burst (Space / click field)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l2.5 2.5M16.5 16.5 19 19M19 5l-2.5 2.5M7.5 16.5 5 19"></path></svg>Burst
+        </button>
+      </div>
+    </div>
+
+    <div class="rail">
+      <div class="card">
+        <h2>Telemetry <span id="fpsBadge" style="color:var(--good);font-family:var(--font-mono);letter-spacing:0">60 fps</span></h2>
+        <div class="tiles">
+          <div class="tile"><span class="lab">Frame time</span><span class="num" id="tFrame">0<small>ms</small></span></div>
+          <div class="tile"><span class="lab">Kinetic E</span><span class="num" id="tKE">0<small>J</small></span></div>
+          <div class="tile"><span class="lab">Momentum</span><span class="num" id="tP">0</span></div>
+          <div class="tile"><span class="lab">Avg speed</span><span class="num" id="tV">0<small>u/s</small></span></div>
+          <div class="tile"><span class="lab">Max speed</span><span class="num" id="tVmax">0<small>u/s</small></span></div>
+          <div class="tile"><span class="lab">Collisions/s</span><span class="num" id="tCps">0</span></div>
+          <div class="tile"><span class="lab">Active bodies</span><span class="num" id="tBodies">0</span></div>
+          <div class="tile"><span class="lab">Spray particles</span><span class="num" id="tSpray">0</span></div>
+        </div>
+      </div>
+
+      <div class="card graph-card">
+        <h2>Live signals</h2>
+        <div class="graphs">
+          <div class="graph">
+            <div class="row"><span class="t">Frame rate</span><span class="r" id="gr1">60 fps</span></div>
+            <canvas id="spark1"></canvas>
+          </div>
+          <div class="graph">
+            <div class="row"><span class="t">System energy</span><span class="r" id="gr2">0 J</span></div>
+            <canvas id="spark2"></canvas>
+          </div>
+          <div class="graph">
+            <div class="row"><span class="t">Body population</span><span class="r" id="gr3">0</span></div>
+            <canvas id="spark3"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="card console">
+        <h2>Field console <span style="color:var(--faint);font-family:var(--font-mono);letter-spacing:0">/dev/eden</span></h2>
+        <div class="log" id="log"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ============================================================
+     EDEN · Burst-Alpha Physics Field
+     A self-contained 2D rigid-circle sim (elastic collisions,
+     gravity, restitution, wind) plus alpha-blended burst spray.
+     ============================================================ */
+
+  var TAU = Math.PI * 2;
+  var canvas = document.getElementById("field");
+  var ctx = canvas.getContext("2d");
+  var W = 0, H = 0, DPR = Math.min(2, window.devicePixelRatio || 1);
+
+  var cfg = {
+    gravity: 1200, restitution: 0.82, wind: 0, rate: 1.0,
+    targetBodies: 34, auto: false, paused: false, trails: true
+  };
+
+  var bodies = [];
+  var spray = [];
+  var collisionsTotal = 0;
+  var collWindow = [];
+
+  var palette = [
+    [169, 112, 255], [255, 93, 177], [79, 224, 224],
+    [123, 160, 255], [255, 160, 120]
+  ];
+
+  function rand(a, b) { return Math.random() * (b - a) + a; }
+  function pick(a) { return a[(Math.random() * a.length) | 0]; }
+
+  function resize() {
+    var hold = canvas.parentElement;
+    W = hold.clientWidth; H = hold.clientHeight;
+    canvas.width = Math.round(W * DPR);
+    canvas.height = Math.round(H * DPR);
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  }
+
+  function makeBody(x, y) {
+    var r = rand(9, 22);
+    return { x: x, y: y, vx: rand(-140, 140), vy: rand(-140, 60), r: r, m: r * r, c: pick(palette) };
+  }
+
+  function seedBodies(n) {
+    bodies.length = 0;
+    for (var i = 0; i < n; i++) bodies.push(makeBody(rand(40, W - 40), rand(40, H * 0.6)));
+  }
+
+  function syncBodyCount() {
+    var n = cfg.targetBodies;
+    while (bodies.length < n) bodies.push(makeBody(rand(40, W - 40), rand(40, H * 0.5)));
+    while (bodies.length > n) bodies.pop();
+  }
+
+  function burst(x, y, big) {
+    var n = big ? 120 : 80;
+    var col = pick(palette);
+    for (var i = 0; i < n; i++) {
+      var a = rand(0, TAU), sp = rand(60, big ? 560 : 420) * (0.4 + Math.random());
+      spray.push({
+        x: x, y: y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp,
+        r: rand(1.2, 3.4), life: 1, decay: rand(0.5, 1.3),
+        c: Math.random() < 0.5 ? col : pick(palette)
+      });
+    }
+    for (var j = 0; j < bodies.length; j++) {
+      var b = bodies[j], dx = b.x - x, dy = b.y - y, d = Math.hypot(dx, dy) || 1;
+      if (d < 220) { var f = (1 - d / 220) * (big ? 900 : 620); b.vx += (dx / d) * f; b.vy += (dy / d) * f; }
+    }
+    if (spray.length > 2400) spray.splice(0, spray.length - 2400);
+    logLine("evt", "burst", "Δ x=" + x.toFixed(0) + " y=" + y.toFixed(0) + " n=" + n + (big ? " [ALPHA]" : ""));
+  }
+
+  function step(dt) {
+    var g = cfg.gravity, wind = cfg.wind, e = cfg.restitution;
+    var i, b;
+    for (i = 0; i < bodies.length; i++) {
+      b = bodies[i];
+      b.vy += g * dt; b.vx += wind * dt; b.x += b.vx * dt; b.y += b.vy * dt;
+      if (b.x - b.r < 0) { b.x = b.r; b.vx = -b.vx * e; }
+      else if (b.x + b.r > W) { b.x = W - b.r; b.vx = -b.vx * e; }
+      if (b.y - b.r < 0) { b.y = b.r; b.vy = -b.vy * e; }
+      else if (b.y + b.r > H) { b.y = H - b.r; b.vy = -b.vy * e; if (Math.abs(b.vy) < 12) b.vy = 0; }
+    }
+    for (i = 0; i < bodies.length; i++) {
+      for (var k = i + 1; k < bodies.length; k++) {
+        var a = bodies[i], c = bodies[k];
+        var dx = c.x - a.x, dy = c.y - a.y;
+        var dist = Math.hypot(dx, dy), min = a.r + c.r;
+        if (dist > 0 && dist < min) {
+          var nx = dx / dist, ny = dy / dist;
+          var overlap = (min - dist);
+          var tm = a.m + c.m;
+          a.x -= nx * overlap * (c.m / tm); a.y -= ny * overlap * (c.m / tm);
+          c.x += nx * overlap * (a.m / tm); c.y += ny * overlap * (a.m / tm);
+          var rvx = c.vx - a.vx, rvy = c.vy - a.vy;
+          var vn = rvx * nx + rvy * ny;
+          if (vn < 0) {
+            var imp = -(1 + e) * vn / (1 / a.m + 1 / c.m);
+            var ix = imp * nx, iy = imp * ny;
+            a.vx -= ix / a.m; a.vy -= iy / a.m;
+            c.vx += ix / c.m; c.vy += iy / c.m;
+            collisionsTotal++; collWindow.push(nowMs());
+          }
+        }
+      }
+    }
+    for (i = spray.length - 1; i >= 0; i--) {
+      var s = spray[i];
+      s.vy += g * 0.35 * dt; s.vx += wind * dt; s.x += s.vx * dt; s.y += s.vy * dt;
+      if (s.y + s.r > H) { s.y = H - s.r; s.vy = -s.vy * 0.5; s.vx *= 0.7; }
+      if (s.x < 0 || s.x > W) s.vx = -s.vx * 0.5;
+      s.life -= s.decay * dt;
+      if (s.life <= 0) spray.splice(i, 1);
+    }
+  }
+
+  function draw() {
+    if (cfg.trails) { ctx.fillStyle = getTrailWash(); ctx.fillRect(0, 0, W, H); }
+    else { ctx.clearRect(0, 0, W, H); ctx.fillStyle = getTrailWash(true); ctx.fillRect(0, 0, W, H); }
+    ctx.globalCompositeOperation = "lighter";
+    for (var i = 0; i < spray.length; i++) {
+      var s = spray[i]; var al = Math.max(0, s.life);
+      ctx.beginPath();
+      ctx.fillStyle = "rgba(" + s.c[0] + "," + s.c[1] + "," + s.c[2] + "," + (al * 0.9) + ")";
+      ctx.arc(s.x, s.y, s.r + al * 1.6, 0, TAU); ctx.fill();
+    }
+    ctx.globalCompositeOperation = "source-over";
+    for (var j = 0; j < bodies.length; j++) {
+      var b = bodies[j], c = b.c;
+      var grd = ctx.createRadialGradient(b.x - b.r * 0.3, b.y - b.r * 0.3, b.r * 0.2, b.x, b.y, b.r);
+      grd.addColorStop(0, "rgba(" + c[0] + "," + c[1] + "," + c[2] + ",1)");
+      grd.addColorStop(1, "rgba(" + (c[0]*0.5|0) + "," + (c[1]*0.5|0) + "," + (c[2]*0.5|0) + ",1)");
+      ctx.beginPath(); ctx.fillStyle = grd; ctx.arc(b.x, b.y, b.r, 0, TAU); ctx.fill();
+      ctx.beginPath(); ctx.strokeStyle = "rgba(" + c[0] + "," + c[1] + "," + c[2] + ",0.55)";
+      ctx.lineWidth = 1.5; ctx.arc(b.x, b.y, b.r + 2, 0, TAU); ctx.stroke();
+      ctx.beginPath(); ctx.strokeStyle = "rgba(255,255,255,0.28)"; ctx.lineWidth = 1;
+      ctx.moveTo(b.x, b.y); ctx.lineTo(b.x + b.vx * 0.05, b.y + b.vy * 0.05); ctx.stroke();
+    }
+  }
+  function getTrailWash(hard) {
+    var light = document.documentElement.getAttribute("data-theme") === "light";
+    if (light) return hard ? "rgba(243,241,248,1)" : "rgba(243,241,248,0.30)";
+    return hard ? "rgba(6,5,11,1)" : "rgba(6,5,11,0.22)";
+  }
+
+  function metrics() {
+    var ke = 0, px = 0, py = 0, vsum = 0, vmax = 0;
+    for (var i = 0; i < bodies.length; i++) {
+      var b = bodies[i], v2 = b.vx * b.vx + b.vy * b.vy, v = Math.sqrt(v2);
+      ke += 0.5 * b.m * v2; px += b.m * b.vx; py += b.m * b.vy;
+      vsum += v; if (v > vmax) vmax = v;
+    }
+    var t = nowMs();
+    while (collWindow.length && t - collWindow[0] > 1000) collWindow.shift();
+    return { ke: ke, p: Math.hypot(px, py), vavg: bodies.length ? vsum / bodies.length : 0, vmax: vmax, cps: collWindow.length };
+  }
+
+  var buf1 = [], buf2 = [], buf3 = [], BUFN = 90;
+  function pushBuf(buf, v) { buf.push(v); if (buf.length > BUFN) buf.shift(); }
+  function drawSpark(id, buf, color, fixedMax) {
+    var cv = document.getElementById(id);
+    var w = cv.clientWidth, h = cv.clientHeight;
+    if (cv.width !== w * DPR) { cv.width = w * DPR; cv.height = h * DPR; }
+    var g = cv.getContext("2d");
+    g.setTransform(DPR, 0, 0, DPR, 0, 0); g.clearRect(0, 0, w, h);
+    if (buf.length < 2) return;
+    var max = fixedMax || 1, min = 0, i;
+    if (!fixedMax) { max = 1e-6; for (i = 0; i < buf.length; i++) if (buf[i] > max) max = buf[i]; }
+    var sx = w / (BUFN - 1), pad = 4;
+    function y(v) { return h - pad - (v - min) / (max - min) * (h - pad * 2); }
+    g.strokeStyle = "rgba(150,140,180,0.14)"; g.lineWidth = 1;
+    g.beginPath(); g.moveTo(0, h - pad); g.lineTo(w, h - pad); g.stroke();
+    g.beginPath();
+    var x0 = (BUFN - buf.length) * sx;
+    g.moveTo(x0, h - pad);
+    for (i = 0; i < buf.length; i++) g.lineTo(x0 + i * sx, y(buf[i]));
+    g.lineTo(x0 + (buf.length - 1) * sx, h - pad); g.closePath();
+    g.fillStyle = color.replace("1)", "0.16)"); g.fill();
+    g.beginPath();
+    for (i = 0; i < buf.length; i++) { var px = x0 + i * sx, py = y(buf[i]); i ? g.lineTo(px, py) : g.moveTo(px, py); }
+    g.strokeStyle = color; g.lineWidth = 1.6; g.stroke();
+    var lx = x0 + (buf.length - 1) * sx, ly = y(buf[buf.length - 1]);
+    g.beginPath(); g.fillStyle = color; g.arc(lx, ly, 2.4, 0, TAU); g.fill();
+  }
+
+  var logEl = document.getElementById("log");
+  var startT = nowMs();
+  function nowMs() { return performance.now(); }
+  function stamp() { var t = (nowMs() - startT) / 1000; return "+" + t.toFixed(2).padStart(6, "0"); }
+  function logLine(kind, tag, msg) {
+    var d = document.createElement("div");
+    d.className = "l " + kind;
+    d.innerHTML = '<span class="ts">' + stamp() + '</span> <span class="tag">' + tag + '</span> ' + msg;
+    logEl.appendChild(d);
+    while (logEl.children.length > 9) logEl.removeChild(logEl.firstChild);
+  }
+
+  var autoAcc = 0, autoEvery = 1.4, autoBeat = 0;
+  function autoTick(dt) {
+    if (!cfg.auto) return;
+    autoAcc += dt;
+    if (autoAcc >= autoEvery) {
+      autoAcc = 0; autoBeat++;
+      var big = autoBeat % 4 === 0;
+      burst(rand(W * 0.2, W * 0.8), rand(H * 0.25, H * 0.7), big);
+      autoEvery = rand(0.9, 2.1);
+      if (autoBeat % 5 === 0) {
+        var nw = Math.round(rand(-400, 400));
+        cfg.wind = nw; document.getElementById("gWind").value = nw; document.getElementById("oWind").textContent = nw;
+        logLine("sys", "loop", "recurse#" + autoBeat + " → wind=" + nw + " next=" + autoEvery.toFixed(2) + "s");
+      }
+    }
+  }
+
+  var last = nowMs(), acc = 0, FIXED = 1 / 120;
+  var fpsBuf = [], statAcc = 0;
+  function frame(t) {
+    var real = (t - last) / 1000; last = t;
+    if (real > 0.05) real = 0.05;
+    var frameMs = real * 1000;
+    fpsBuf.push(real); if (fpsBuf.length > 30) fpsBuf.shift();
+    if (!cfg.paused) {
+      var dt = real * cfg.rate;
+      autoTick(dt); acc += dt;
+      var guard = 0;
+      while (acc >= FIXED && guard < 8) { step(FIXED); acc -= FIXED; guard++; }
+      if (guard >= 8) acc = 0;
+    }
+    draw();
+    statAcc += real;
+    if (statAcc >= 0.1) { updateStats(frameMs); statAcc = 0; }
+    requestAnimationFrame(frame);
+  }
+
+  function fmt(n, d) {
+    if (n >= 1e6) return (n / 1e6).toFixed(d || 2) + "M";
+    if (n >= 1e3) return (n / 1e3).toFixed(d || 1) + "k";
+    return n.toFixed(d || 0);
+  }
+  var $ = function (id) { return document.getElementById(id); };
+  function updateStats(frameMs) {
+    var m = metrics();
+    var avg = fpsBuf.reduce(function (a, b) { return a + b; }, 0) / (fpsBuf.length || 1);
+    var fps = avg > 0 ? Math.min(120, 1 / avg) : 0;
+    $("tFrame").innerHTML = frameMs.toFixed(1) + "<small>ms</small>";
+    $("tKE").innerHTML = fmt(m.ke) + "<small>J</small>";
+    $("tP").textContent = fmt(m.p);
+    $("tV").innerHTML = fmt(m.vavg) + "<small>u/s</small>";
+    $("tVmax").innerHTML = fmt(m.vmax) + "<small>u/s</small>";
+    $("tCps").textContent = m.cps;
+    $("tBodies").textContent = bodies.length;
+    $("tSpray").textContent = spray.length;
+    var fb = $("fpsBadge"); fb.textContent = fps.toFixed(0) + " fps";
+    fb.style.color = fps >= 50 ? "var(--good)" : fps >= 30 ? "var(--warn)" : "var(--crit)";
+    $("ovBodies").textContent = bodies.length;
+    $("ovSpray").textContent = spray.length;
+    $("ovColl").textContent = collisionsTotal;
+    $("ovKE").textContent = fmt(m.ke);
+    $("ovP").textContent = fmt(m.p);
+    $("ovV").textContent = fmt(m.vavg);
+    $("ovG").textContent = cfg.gravity;
+    $("ovW").textContent = cfg.wind;
+    $("ovE").textContent = cfg.restitution.toFixed(2);
+    pushBuf(buf1, fps); pushBuf(buf2, m.ke); pushBuf(buf3, bodies.length);
+    drawSpark("spark1", buf1, "rgba(86,227,159,1)", 120);
+    drawSpark("spark2", buf2, "rgba(169,112,255,1)");
+    drawSpark("spark3", buf3, "rgba(79,224,224,1)", 90);
+    $("gr1").textContent = fps.toFixed(0) + " fps";
+    $("gr2").textContent = fmt(m.ke) + " J";
+    $("gr3").textContent = bodies.length;
+  }
+
+  function bindRange(id, outId, fn, fmtOut) {
+    var el = $(id), out = $(outId);
+    el.addEventListener("input", function () {
+      var v = parseFloat(el.value); fn(v);
+      out.textContent = fmtOut ? fmtOut(v) : v;
+    });
+  }
+  bindRange("gGrav", "oGrav", function (v) { cfg.gravity = v; });
+  bindRange("gRest", "oRest", function (v) { cfg.restitution = v / 100; }, function (v) { return (v / 100).toFixed(2); });
+  bindRange("gWind", "oWind", function (v) { cfg.wind = v; });
+  bindRange("gRate", "oRate", function (v) { cfg.rate = v / 100; $("pillRtV").textContent = (v / 100).toFixed(2) + "×"; }, function (v) { return (v / 100).toFixed(1) + "×"; });
+  bindRange("gCount", "oCount", function (v) { cfg.targetBodies = v | 0; syncBodyCount(); });
+
+  var btnAuto = $("btnAuto"), pillLoop = $("pillLoop");
+  btnAuto.addEventListener("click", function () {
+    cfg.auto = !cfg.auto;
+    btnAuto.setAttribute("aria-pressed", cfg.auto);
+    pillLoop.querySelector(".dot").style.background = cfg.auto ? "var(--violet)" : "var(--faint)";
+    pillLoop.querySelector(".dot").style.boxShadow = cfg.auto ? "0 0 8px var(--violet)" : "none";
+    pillLoop.classList.toggle("live", cfg.auto);
+    logLine("sys", "loop", cfg.auto ? "auto-recursive burst loop ENGAGED" : "auto-loop halted");
+  });
+  var btnPause = $("btnPause");
+  btnPause.addEventListener("click", function () {
+    cfg.paused = !cfg.paused; btnPause.setAttribute("aria-pressed", cfg.paused);
+    logLine("sys", "sim", cfg.paused ? "paused" : "resumed");
+  });
+  $("btnReset").addEventListener("click", function () {
+    seedBodies(cfg.targetBodies); spray.length = 0; collisionsTotal = 0; collWindow.length = 0;
+    logLine("sys", "sim", "field reset · " + cfg.targetBodies + " bodies seeded");
+  });
+  $("btnBurst").addEventListener("click", function () { burst(rand(W * 0.3, W * 0.7), rand(H * 0.3, H * 0.6), true); });
+
+  canvas.addEventListener("pointerdown", function (e) {
+    var rect = canvas.getBoundingClientRect();
+    burst(e.clientX - rect.left, e.clientY - rect.top, e.shiftKey);
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.code === "Space") { e.preventDefault(); burst(rand(W * 0.3, W * 0.7), rand(H * 0.3, H * 0.6), true); }
+    else if (e.key === "p" || e.key === "P") { btnPause.click(); }
+    else if (e.key === "a" || e.key === "A") { btnAuto.click(); }
+    else if (e.key === "r" || e.key === "R") { $("btnReset").click(); }
+  });
+
+  $("themeBtn").addEventListener("click", function () {
+    var cur = document.documentElement.getAttribute("data-theme");
+    document.documentElement.setAttribute("data-theme", cur === "light" ? "dark" : "light");
+  });
+
+  window.addEventListener("resize", resize);
+
+  resize();
+  seedBodies(cfg.targetBodies);
+  logLine("sys", "boot", "EDEN field online · fixed-step 120Hz · elastic solver ready");
+  logLine("sys", "boot", "press SPACE to burst · A engages auto-recursive loop");
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
