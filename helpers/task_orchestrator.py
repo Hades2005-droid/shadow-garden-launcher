@@ -27,12 +27,22 @@ import os
 import sys
 from typing import Any
 
-# Import the helper modules (they must be in the same directory).
+# Import the helper modules (adjust paths if needed).
+import importlib.util
+
+def load_module(name, path):
+    spec = importlib.util.spec_from_file_location(name, path)
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[name] = module  # Register before executing
+    spec.loader.exec_module(module)
+    return module
+
 try:
-    import connector_bridge_enhanced as bridge_enh
-    import key_rotation_helper as key_rot
-    import steamworks_integration as steamworks
-except ImportError as e:
+    # Load helpers from same directory
+    bridge_enh = load_module("connector_bridge_enhanced", "../monitors/connector_bridge_enhanced.py")
+    key_rot = load_module("key_rotation_helper", "key_rotation_helper.py")
+    steamworks = load_module("steamworks_integration", "steamworks_integration.py")
+except (ImportError, FileNotFoundError) as e:
     print(f"Error: Could not import helper modules. {e}", file=sys.stderr)
     sys.exit(1)
 
