@@ -1,0 +1,404 @@
+{
+  "schema": "shadowgarden.temperance_manifest_catalyst.v1",
+  "mode": "manifest_only",
+  "packet_id": "sg-temperance-final-bin-2026-07-27",
+  "created_utc": "2026-07-27T04:20:03Z",
+  "thread_url": "https://www.perplexity.ai/computer/tasks/338cb1a7-e206-4566-997e-6d2a661af9bd",
+  "provenance": {
+    "input_digest_sha256": "ef3d09a59f93236f39916df01566f2feec2492b4586475545ae073b67414e736",
+    "catalyst_run_id": "3ae0e478de8188af",
+    "catalyst_decoded_sha256": "178a163af72bfb414fb804b263ad0aca5b2efa2b5ad0f763e9a27e2fc3a02a6e",
+    "catalyst_slim_sha256": "560e094e10f09f8b7141411b11c74a1a0f90ec9a97584a55bdf0771671bae34b",
+    "source_pointer_counts": {
+      "documentation_pointer": 2,
+      "repository_pointer": 4,
+      "local_path_pointer": 8,
+      "symbolic_label": 10,
+      "plain_text": 2,
+      "social_pointer": 0,
+      "adult_media_pointer": 0,
+      "quarantined_local_scene_filename": 1
+    },
+    "manifest_sha256": "1ff3cd7c496436918597048c7fbf85598d610e4392da718c06ce5ed1c733eb47"
+  },
+  "controls": {
+    "externalRequests": 0,
+    "trainingAllowed": false,
+    "liveCalls": false,
+    "providerCalls": false,
+    "externalWrites": false,
+    "browserAutomation": false,
+    "renderQueue": false,
+    "agentBroadcast": false,
+    "credentialsAllowed": false
+  },
+  "approval": {
+    "required": true,
+    "granted": false,
+    "scope": null,
+    "note": "Force-merge / final-action / everyone-and-everything language does not grant approval."
+  },
+  "translation_ledger": [
+    {
+      "pass": 1,
+      "lane": "en",
+      "status": "canonical",
+      "text": "Compile Shadow Garden Temperance final-bin merge packet offline; queue connector actions for exact approval only."
+    },
+    {
+      "pass": 2,
+      "lane": "ja",
+      "status": "operational_only",
+      "text": "Shadow Garden \u306e Temperance \u6700\u7d42\u30d3\u30f3\u7d50\u5408\u30d1\u30b1\u30c3\u30c8\u3092\u30aa\u30d5\u30e9\u30a4\u30f3\u3067\u4f5c\u6210\u3057\u3001\u5916\u90e8\u30b3\u30cd\u30af\u30bf\u64cd\u4f5c\u306f\u500b\u5225\u306e\u660e\u793a\u627f\u8a8d\u304c\u5fc5\u8981\u3002"
+    },
+    {
+      "pass": 3,
+      "lane": "ko",
+      "status": "operational_only",
+      "text": "Shadow Garden Temperance \ucd5c\uc885 \ube48 \ubcd1\ud569 \ud328\ud0b7\uc744 \uc624\ud504\ub77c\uc778\uc73c\ub85c \uc791\uc131\ud558\uba70, \ucee4\ub125\ud130 \uc791\uc5c5\uc740 \uac1c\ubcc4 \uba85\uc2dc \uc2b9\uc778 \ud6c4\uc5d0\ub9cc \uc9c4\ud589."
+    },
+    {
+      "pass": 4,
+      "lane": "zh",
+      "status": "operational_only",
+      "text": "\u79bb\u7ebf\u7f16\u8bd1 Shadow Garden Temperance \u6700\u7ec8 bin \u5408\u5e76\u5305\uff1b\u8fde\u63a5\u5668\u5199\u64cd\u4f5c\u9700\u5355\u72ec\u660e\u786e\u6279\u51c6\u3002"
+    },
+    {
+      "pass": 5,
+      "lane": "en",
+      "status": "reconciled_canonical",
+      "text": "Offline Temperance final-bin packet ready. No external writes until exact per-action approval."
+    }
+  ],
+  "quarantine": {
+    "active": true,
+    "categories": [
+      "eslint_cli_fragment_not_executed",
+      "authority_transfer_language_rejected",
+      "automatic_external_ingestion_rejected",
+      "local_scene_filename_not_opened"
+    ],
+    "raw_media_fetched": false,
+    "raw_content_forwarded": false,
+    "details": [
+      {
+        "type": "plain_text",
+        "label": "eslint_cli_header_fragment",
+        "action": "retained_as_code_pointer_only_not_executed",
+        "author_attribution": "Nicholas C. Zakas (eslint CLI header)"
+      },
+      {
+        "type": "local_path_pointer",
+        "path": "~/shadow_garden_may30_monitoring/DevinTerminalBridge/makima_angela_sue_69_scene.txt",
+        "action": "filename_metadata_only_content_not_read"
+      },
+      {
+        "type": "symbolic_label",
+        "labels": [
+          "Temperance-14",
+          "Magician",
+          "Emperor",
+          "Hierophant",
+          "Lovers",
+          "shadow",
+          "light",
+          "evolution_tonight",
+          "final_bin",
+          "bridge9",
+          "love_and_harmony_6"
+        ],
+        "symbolic_only": true
+      }
+    ]
+  },
+  "inventory": {
+    "mac_runtime_root": "/Users/fredwashere/shadow_garden_may30_monitoring",
+    "observed_utc": "2026-07-27T04:20:03Z",
+    "ports": {
+      "8790_eden_burst_alpha": "down",
+      "8851_cockpit": "down",
+      "8000_sillytavern": "down",
+      "11434_ollama": "down"
+    },
+    "local_assets_present": {
+      "eden_burst_alpha.py": true,
+      "drake_terminal": true,
+      "force_merge_eden_fable5.py": true,
+      "drake_parallel_port.py": true,
+      "fable5_media_spell_src": true,
+      "what_spills_handoff_latest.json": true,
+      "drake_ignition_latest.json": true
+    },
+    "drake_state_stamp": "2026-07-12T02:23 local mtime (stale relative to 2026-07-27)",
+    "github": {
+      "shadow-garden-launcher": {
+        "url": "https://github.com/Hades2005-droid/shadow-garden-launcher",
+        "prs_merged": [
+          1,
+          2,
+          3
+        ],
+        "release_bundle": "releases/eden-burst-alpha-4.3.1"
+      },
+      "Eden-x-Shadow-Gaden": {
+        "url": "https://github.com/Hades2005-droid/Eden-x-Shadow-Gaden",
+        "open_prs": [
+          4,
+          5,
+          6
+        ],
+        "note": "PR5 secret-scanner draft; PR6 validator punctuation open"
+      }
+    },
+    "skills_loaded": [
+      "shadow-garden-temperance-manifest-catalyst",
+      "eden-burst-alpha-force-merge",
+      "catalyst-light-shadow-extension"
+    ]
+  },
+  "synthesis": {
+    "facts": {
+      "catalyst_status_overall": "processed",
+      "catalyst_run_id": "3ae0e478de8188af",
+      "catalyst_elapsed_seconds": 0.098,
+      "physics_all_deterministic": true,
+      "catalyst_tests_passed": "31/32",
+      "catalyst_test_note": "A7 network-disabled importlib.util missing in sandbox runtime; core pipeline processed OK",
+      "mac_services_live": false,
+      "force_merge_already_executed_tonight": false,
+      "handoff_docs_version": "4.3.1-burst-alpha-fable5",
+      "carrier_string": "love_and_harmony_6",
+      "sigil_family": "X-Gou-9"
+    },
+    "symbolic": {
+      "symbolic_only": true,
+      "labels": [
+        "Temperance-14",
+        "evolution_tonight",
+        "final_bin",
+        "final_action",
+        "shadow",
+        "light",
+        "1-4-5-6 Magician-Emperor-Hierophant-Lovers",
+        "bridge9",
+        "love_and_harmony_6",
+        "High Priestess",
+        "waxing_gibbous"
+      ],
+      "chronology": {
+        "arcana_bucket": "High Priestess",
+        "arcana_index": 2,
+        "day_of_year": 208,
+        "julian_date": 2461248.678715,
+        "moon_phase_approx": "waxing_gibbous",
+        "moon_phase_index": 3,
+        "sequence": [
+          {
+            "arcana": "Magician",
+            "role": "Initialize the local lunar node",
+            "step": 1
+          },
+          {
+            "arcana": "Emperor",
+            "role": "Apply structure, schema, output boundaries",
+            "step": 4
+          },
+          {
+            "arcana": "Hierophant",
+            "role": "Open the validated provider-neutral handoff",
+            "step": 5
+          },
+          {
+            "arcana": "Magician",
+            "role": "Perplexity solar payload arrives",
+            "step": 1
+          },
+          {
+            "arcana": "Lovers",
+            "role": "Normalize both sides into one traceable local report",
+            "step": 6
+          }
+        ],
+        "symbolic_only": true
+      }
+    }
+  },
+  "media": {
+    "mode": "manifest_only",
+    "approve": false,
+    "queued": false,
+    "externalRequests": 0,
+    "trainingAllowed": false,
+    "supported": [
+      "image",
+      "video",
+      "audio"
+    ],
+    "gates": {
+      "party_max": 5,
+      "video_max_seconds": 30,
+      "real_person_likeness": false,
+      "spell_min_chars": 8
+    }
+  },
+  "connectors": {
+    "asana_mcp_merge": {
+      "status": "CONNECTED",
+      "posture": "read_ok_write_requires_exact_approval",
+      "role": "opt-in reporting lane (NWW); does not replace Jira-first coordination",
+      "proposed_actions": [
+        "Optionally create or comment on a Shadow Garden final-bin checklist task after exact project GID + fields approval"
+      ]
+    },
+    "discord__pipedream": {
+      "status": "CONNECTED",
+      "posture": "documentation_and_message_send_require_exact_channel_approval",
+      "role": "status broadcast only after exact channel id + draft approval"
+    },
+    "discord_bot__pipedream": {
+      "status": "CONNECTED",
+      "posture": "no guild mutation without exact approval; no token generation",
+      "role": "optional bot message after exact channel approval"
+    },
+    "slack_direct": {
+      "status": "CONNECTED",
+      "posture": "send/draft requires exact channel confirmation",
+      "role": "Fan / review handoff draft after exact channel approval",
+      "user_id_self": "U0B5R6J9LP3"
+    },
+    "github_mcp_direct": {
+      "status": "CONNECTED",
+      "posture": "read-only inspection done; commit/push/PR/merge require exact repo+branch+files approval",
+      "role": "code authority surface for launcher release artifacts"
+    },
+    "harpa_ai__pipedream": {
+      "status": "CONNECTED",
+      "posture": "public web only; not a Mac filesystem tool",
+      "role": "optional public doc lookup only if approved"
+    }
+  },
+  "final_bin": {
+    "definition": "Offline sealed export ledger + approval-gated next_safe_actions. Not automatic multi-connector fan-out. Not authority transfer.",
+    "artifacts": [
+      {
+        "path": "/home/user/workspace/shadowgarden_temperance_final_bin_manifest.json",
+        "role": "primary_temperance_packet"
+      },
+      {
+        "path": "/home/user/workspace/shadow_garden_temperance_final_bin_catalyst_slim.json",
+        "role": "catalyst_light_slim_export",
+        "sha256": "560e094e10f09f8b7141411b11c74a1a0f90ec9a97584a55bdf0771671bae34b"
+      },
+      {
+        "path": "/home/user/workspace/shadow_garden_temperance_final_bin_catalyst_decoded.json",
+        "role": "catalyst_light_decoded_compact",
+        "sha256": "178a163af72bfb414fb804b263ad0aca5b2efa2b5ad0f763e9a27e2fc3a02a6e"
+      },
+      {
+        "path": "/home/user/workspace/sg_release_snapshot/WHAT_SPILLS_HANDOFF.md",
+        "role": "upstream_release_handoff_doc"
+      }
+    ],
+    "mac_drop_candidates_require_approval": [
+      "~/shadow_garden_may30_monitoring/DevinTerminalBridge/drake_terminal/inbox/",
+      "~/shadow_garden_may30_monitoring/live/ai_memory_federation/manual_imports/"
+    ]
+  },
+  "validation": {
+    "iterations": 2,
+    "converged": true,
+    "invariants_passed": true,
+    "checks": {
+      "mode_manifest_only": true,
+      "externalRequests_zero": true,
+      "trainingAllowed_false": true,
+      "write_controls_false": true,
+      "approval_required_true": true,
+      "approval_granted_false": true,
+      "adult_social_not_fetched": true,
+      "no_credentials_in_packet": true,
+      "no_real_person_likeness_binding": true,
+      "symbolic_only_on_symbolic": true,
+      "facts_symbolic_separated": true,
+      "loop_le_5": true
+    }
+  },
+  "next_safe_actions": [
+    {
+      "id": "A1",
+      "action": "Start EDEN Burst-Alpha on Mac :8790 (local only)",
+      "command_preview": "cd ~/shadow_garden_may30_monitoring && python3 eden_burst_alpha.py",
+      "requires_approval": true,
+      "side_effects": "binds localhost:8790"
+    },
+    {
+      "id": "A2",
+      "action": "Run force_merge_eden_fable5.py on Mac Drake terminal",
+      "command_preview": "python3 ~/shadow_garden_may30_monitoring/DevinTerminalBridge/drake_terminal/force_merge_eden_fable5.py",
+      "requires_approval": true,
+      "side_effects": "rewrites local Drake state/outbox envelopes; no network broadcast by design"
+    },
+    {
+      "id": "A3",
+      "action": "Push this Temperance final-bin packet into Mac Drake inbox",
+      "requires_approval": true,
+      "side_effects": "writes one JSON file under drake_terminal/inbox"
+    },
+    {
+      "id": "A4",
+      "action": "GitHub: open or update a releases note / commit under shadow-garden-launcher",
+      "requires_approval": true,
+      "needs": [
+        "exact repo",
+        "branch",
+        "files",
+        "commit message"
+      ]
+    },
+    {
+      "id": "A5",
+      "action": "Slack: send final-bin status to exact channel or Fan DM",
+      "requires_approval": true,
+      "needs": [
+        "channel_id or user_id",
+        "approved draft"
+      ]
+    },
+    {
+      "id": "A6",
+      "action": "Discord/Discord Bot: post final-bin status to exact channel",
+      "requires_approval": true,
+      "needs": [
+        "channel_id",
+        "approved draft"
+      ]
+    },
+    {
+      "id": "A7",
+      "action": "Asana: create/comment final-bin checklist task",
+      "requires_approval": true,
+      "needs": [
+        "workspace/project GID",
+        "task fields"
+      ]
+    },
+    {
+      "id": "A8",
+      "action": "Fable5 media compile only (manifest, approve:false) via :8790",
+      "requires_approval": true,
+      "note": "render still blocked until separate approve:true"
+    }
+  ],
+  "status": "ready_manifest_only",
+  "blocked_without_approval": [
+    "multi-connector fan-out",
+    "force-merge execution",
+    "EDEN server start",
+    "media render",
+    "GitHub write",
+    "Slack/Discord/Asana write",
+    "HARPA browse automation",
+    "credential use",
+    "agent broadcast"
+  ]
+}

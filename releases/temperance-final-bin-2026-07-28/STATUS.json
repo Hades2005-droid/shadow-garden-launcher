@@ -1,0 +1,33 @@
+{
+  "schema": "shadowgarden.final_bin_status.v1",
+  "created_utc": "2026-07-28T18:32:34Z",
+  "mode": "manifest_only_completed_with_user_approval",
+  "thread_url": "https://www.perplexity.ai/computer/tasks/338cb1a7-e206-4566-997e-6d2a661af9bd",
+  "repo_target": "Hades2005-droid/shadow-garden-launcher",
+  "path": "releases/temperance-final-bin-2026-07-28/",
+  "completed_local": [
+    "A1_eden_8790",
+    "A2_force_merge",
+    "A3_inbox_pointer",
+    "A5_slack_draft"
+  ],
+  "completing_now": [
+    "github_write",
+    "slack_send",
+    "discord_post",
+    "asana_task",
+    "harpa_web",
+    "academic",
+    "gdrive",
+    "gmail_calendar",
+    "fable5_compile"
+  ],
+  "controls": {
+    "trainingAllowed": false,
+    "agentBroadcast": false,
+    "credentialsInRepo": false,
+    "adultChannelUsed": false
+  },
+  "carrier": "love_and_harmony_6",
+  "sigil_family": "X-Gou-9"
+}
