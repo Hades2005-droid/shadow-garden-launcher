@@ -1,0 +1,324 @@
+{
+  "carrier": "love_and_harmony_6",
+  "controls": {
+    "agent_broadcast": false,
+    "browser_automation": false,
+    "credentials_allowed": false,
+    "external_fetch": false,
+    "symbolic_only": true
+  },
+  "diagnostics": {
+    "any_error": false,
+    "any_rejected": false,
+    "node_healths": [
+      {
+        "node": 1,
+        "status": "accepted"
+      },
+      {
+        "node": 2,
+        "status": "recorded"
+      },
+      {
+        "node": 3,
+        "status": "clean"
+      },
+      {
+        "node": 4,
+        "status": "valid"
+      },
+      {
+        "node": 5,
+        "status": "computed"
+      },
+      {
+        "node": 6,
+        "status": "combined"
+      },
+      {
+        "node": 7,
+        "status": "written"
+      }
+    ],
+    "version": "0.15.1-angela-10"
+  },
+  "envelope_version": "catalyst_light/1",
+  "lunar_summary": {
+    "harmonic": {
+      "energy": "<omitted_list:2001>",
+      "energy_drift_abs": 1.2499992203318655e-05,
+      "t": "<omitted_list:2001>",
+      "v": "<omitted_list:2001>",
+      "x": "<omitted_list:2001>"
+    },
+    "kepler": {
+      "energy_drift_rel": 2.454703107446221e-13,
+      "t": "<omitted_list:6284>",
+      "vx": "<omitted_list:6284>",
+      "vy": "<omitted_list:6284>",
+      "x": "<omitted_list:6284>",
+      "y": "<omitted_list:6284>"
+    },
+    "qho": {
+      "energies": [
+        0.49994999499845816,
+        1.4997499549774989,
+        2.499349824875377,
+        3.498749544571946,
+        4.49794905388673,
+        5.496948292578912,
+        6.495747200347215,
+        7.49434571682981,
+        8.49274378160421,
+        9.490941334187236
+      ],
+      "first_excited": "<omitted_list:401>",
+      "ground_energy_err_abs": 5.000500154184184e-05,
+      "ground_state": "<omitted_list:401>",
+      "x_grid": "<omitted_list:401>"
+    },
+    "wave": {
+      "snapshots_t": [
+        0.0,
+        0.5,
+        1.0,
+        1.5,
+        2.0
+      ],
+      "snapshots_u": [
+        [
+          0.0,
+          0.03,
+          0.06,
+          0.09,
+          0.12,
+          0.15000000000000002,
+          0.18,
+          0.21000000000000002,
+          0.24,
+          0.27,
+          0.30000000000000004,
+          0.33,
+          "<...89 more>"
+        ],
+        [
+          0.0,
+          -0.017162745080414363,
+          -0.028723229470116116,
+          -0.04337609697473316,
+          -0.062159123246554135,
+          -0.07586321382742398,
+          -0.08778141654404135,
+          -0.10423302061121631,
+          -0.12138823025224113,
+          -0.13727774697108167,
+          -0.1500408536713323,
+          -0.1605599012341926,
+          "<...89 more>"
+        ],
+        [
+          0.0,
+          -0.015359724328355844,
+          -0.029395046813272846,
+          -0.04565393214722326,
+          -0.059515044300486424,
+          -0.07515039494419837,
+          -0.09023197746820288,
+          -0.10448398681596673,
+          -0.12058669821139902,
+          -0.13457992259490698,
+          -0.1501100810554119,
+          -0.16516576274586353,
+          "<...89 more>"
+        ],
+        [
+          0.0,
+          -0.015091695402192642,
+          -0.02983493807054169,
+          -0.04520510332168019,
+          -0.05979366937594611,
+          -0.07516617839280694,
+          -0.0898909137473362,
+          -0.10501945366970797,
+          -0.11999258575110401,
+          -0.13487380702057694,
+          -0.14984896317553542,
+          -0.16463771084960474,
+          "<...89 more>"
+        ],
+        [
+          0.0,
+          0.028879705119251153,
+          0.05935590674548494,
+          0.09143708312573817,
+          0.1209296216837188,
+          0.1493900505759125,
+          0.17765424910370067,
+          0.2101069790493404,
+          0.24233843164236948,
+          0.2719474654396551,
+          0.2982227203569109,
+          0.3267510270147693,
+          "<...89 more>"
+        ]
+      ],
+      "x_grid": "<omitted_list:101>"
+    }
+  },
+  "nodes": [
+    {
+      "layer": "solar_ingress",
+      "node": 1,
+      "notes": "input has 6 top-level keys",
+      "status": "accepted"
+    },
+    {
+      "layer": "provenance",
+      "node": 2,
+      "notes": "sha256 + run_id set",
+      "status": "recorded"
+    },
+    {
+      "layer": "sanitizer",
+      "node": 3,
+      "notes": "canonical bytes: 997",
+      "status": "clean"
+    },
+    {
+      "layer": "contract_gate",
+      "node": 4,
+      "notes": "schema=perplexity_solar_input.v1",
+      "status": "valid"
+    },
+    {
+      "layer": "lunar_engine",
+      "node": 5,
+      "notes": "verlet + wave + eigh",
+      "status": "computed"
+    },
+    {
+      "layer": "synthesis",
+      "node": 6,
+      "notes": "facts and symbolic kept separate",
+      "status": "combined"
+    },
+    {
+      "layer": "local_status",
+      "node": 7,
+      "notes": "atomic write pending",
+      "status": "written"
+    },
+    {
+      "layer": "diagnostics",
+      "node": 8,
+      "notes": "health snapshot",
+      "status": "reported"
+    },
+    {
+      "layer": "export_ledger",
+      "node": 9,
+      "notes": "no auto-broadcast; manual gift only",
+      "status": "ready"
+    },
+    {
+      "layer": "voice_role_bridge",
+      "node": 10,
+      "notes": "no manifest in solar input; used default technical peer set",
+      "status": "default_manifest"
+    }
+  ],
+  "provenance": {
+    "retrieval_method": "user_paste",
+    "run_id": "3ae0e478de8188af",
+    "sha256": "3ae0e478de8188af759d1a163f44cd4774bb448f1c1e377c130f304439e1b685",
+    "source": "https://www.perplexity.ai/computer/tasks/338cb1a7-e206-4566-997e-6d2a661af9bd",
+    "timestamp_utc": "2026-07-27T04:17:21Z"
+  },
+  "run_id": "3ae0e478de8188af",
+  "sigil_family": "X-Gou-9",
+  "status": {
+    "controls": {
+      "agent_broadcast": false,
+      "browser_automation": false,
+      "credentials_allowed": false,
+      "external_fetch": false,
+      "symbolic_only": true
+    },
+    "elapsed_seconds": 0.098,
+    "overall": "processed",
+    "run_id": "3ae0e478de8188af"
+  },
+  "synthesis": {
+    "facts": {
+      "physics_all_deterministic": true,
+      "physics_summary_keys": [
+        "harmonic",
+        "kepler",
+        "qho",
+        "wave"
+      ],
+      "provenance_sha256": "3ae0e478de8188af759d1a163f44cd4774bb448f1c1e377c130f304439e1b685"
+    },
+    "symbolic": {
+      "arcana_bucket": "High Priestess",
+      "arcana_index": 2,
+      "day_of_year": 208,
+      "julian_date": 2461248.678715,
+      "moon_phase_approx": "waxing_gibbous",
+      "moon_phase_index": 3,
+      "sequence": [
+        {
+          "arcana": "Magician",
+          "role": "Initialize the local lunar node",
+          "step": 1
+        },
+        {
+          "arcana": "Emperor",
+          "role": "Apply structure, schema, output boundaries",
+          "step": 4
+        },
+        {
+          "arcana": "Hierophant",
+          "role": "Open the validated provider-neutral handoff",
+          "step": 5
+        },
+        {
+          "arcana": "Magician",
+          "role": "Perplexity solar payload arrives",
+          "step": 1
+        },
+        {
+          "arcana": "Lovers",
+          "role": "Normalize both sides into one traceable local report",
+          "step": 6
+        }
+      ],
+      "symbolic_only": true
+    },
+    "unresolved": [],
+    "warnings": [
+      "symbolic layer is metadata only; do not treat as scientific claim"
+    ]
+  },
+  "timestamp_utc": "2026-07-27T04:17:21Z",
+  "version": "0.15.1-angela-10",
+  "voice_role_summary": {
+    "controls_locked_false": true,
+    "layers": [
+      "back_end_producer",
+      "front_end_driver",
+      "merge_orchestrator",
+      "provenance_and_redaction",
+      "schema_validator"
+    ],
+    "role_count": 5,
+    "role_names": [
+      "Addie",
+      "Angela",
+      "Claire",
+      "M0m",
+      "Sue"
+    ],
+    "schema": "catalyst_light.voice_role_manifest.v1"
+  }
+}
