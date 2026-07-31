@@ -27,23 +27,50 @@ import os
 import sys
 from typing import Any
 
-# Import the helper modules (adjust paths if needed).
+# Module loading is anchored to this file's location, not the working
+# directory, so the orchestrator runs correctly from anywhere.
 import importlib.util
+from pathlib import Path
 
-def load_module(name, path):
+HERE = Path(__file__).resolve().parent
+REPO_ROOT = HERE.parent
+
+
+def load_module(name: str, path: Path):
+    """Load a sibling helper by absolute path.
+
+    ``sys.modules[name]`` must be set BEFORE ``exec_module``: the helpers use
+    ``@dataclass``, and field-annotation resolution looks the module up in
+    ``sys.modules``. Without this line it fails with
+    ``'NoneType' object has no attribute '__dict__'``. Do not "clean up".
+    """
     spec = importlib.util.spec_from_file_location(name, path)
+    if spec is None or spec.loader is None:
+        raise ImportError(f"could not build a spec for {name} at {path}")
     module = importlib.util.module_from_spec(spec)
-    sys.modules[name] = module  # Register before executing
-    spec.loader.exec_module(module)
+    sys.modules[name] = module
+    try:
+        spec.loader.exec_module(module)
+    except Exception:
+        sys.modules.pop(name, None)
+        raise
     return module
 
+
+MODULE_PATHS = {
+    "connector_bridge_enhanced": REPO_ROOT / "monitors" / "connector_bridge_enhanced.py",
+    "key_rotation_helper": HERE / "key_rotation_helper.py",
+    "steamworks_integration": HERE / "steamworks_integration.py",
+}
+
 try:
-    # Load helpers from same directory
-    bridge_enh = load_module("connector_bridge_enhanced", "../monitors/connector_bridge_enhanced.py")
-    key_rot = load_module("key_rotation_helper", "key_rotation_helper.py")
-    steamworks = load_module("steamworks_integration", "steamworks_integration.py")
-except (ImportError, FileNotFoundError) as e:
-    print(f"Error: Could not import helper modules. {e}", file=sys.stderr)
+    bridge_enh = load_module("connector_bridge_enhanced", MODULE_PATHS["connector_bridge_enhanced"])
+    key_rot = load_module("key_rotation_helper", MODULE_PATHS["key_rotation_helper"])
+    steamworks = load_module("steamworks_integration", MODULE_PATHS["steamworks_integration"])
+except (ImportError, FileNotFoundError, OSError) as e:
+    print(f"Error: could not load helper modules: {e}", file=sys.stderr)
+    for name, path in MODULE_PATHS.items():
+        print(f"  {name}: {path} ({'found' if path.is_file() else 'MISSING'})", file=sys.stderr)
     sys.exit(1)
 
 
@@ -151,6 +178,15 @@ def get_status() -> dict[str, Any]:
         "completed": completed,
         "pending": len(TASKS) - completed,
         "progress_pct": int((completed / len(TASKS)) * 100),
+    }
+
+    # Loopback coverage, reported alongside task state so an unstarted
+    # service shows up here instead of being discovered by hand later.
+    pm = bridge_enh.port_map()
+    status["loopback"] = {
+        "up": pm["up"],
+        "down": pm["down"],
+        "missing_required": pm["missing_required"],
     }
 
     return status

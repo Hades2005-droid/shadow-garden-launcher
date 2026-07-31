@@ -78,12 +78,37 @@ All content-neutral, credential-free, no network calls, no secrets. Each has `ru
 | `helpers/task_orchestrator.py` | Aggregates the three above; `status` / `task <1-5>` / `verify-all` | `python3 task_orchestrator.py self-test` → `{"ok": true, "tests": 3}` |
 | `TASKS_INTEGRATION_GUIDE.md` | Workflow, env vars, troubleshooting | — |
 
-**Two constraints you'll hit immediately:**
+**One constraint that is load-bearing:** the loader sets `sys.modules[name] = module` **before** `exec_module`. Without it, `@dataclass` field-annotation resolution fails with `'NoneType' object has no attribute '__dict__'`. It's commented in place. Don't "clean it up."
 
-1. `task_orchestrator.py` loads `connector_bridge_enhanced` via a **relative path** (`../monitors/…`). It only runs from inside `helpers/`. If you want it callable from anywhere, that's the first thing to fix — resolve paths off `__file__`, not CWD. I'd take that patch.
-2. It uses `importlib` with `sys.modules[name] = module` set **before** `exec_module`. That line is load-bearing — without it, `@dataclass` field resolution fails with `'NoneType' object has no attribute '__dict__'`. Don't "clean it up."
+**Your §8 q2 is done** — the relative-path problem is fixed, not handed back. Paths now resolve off `__file__`, so the orchestrator runs from any CWD. Verified from repo root, from `helpers/`, and from `/tmp`. On failure it prints each expected path with found/MISSING rather than a bare `ImportError`.
 
-**Known-good baseline:** `task_orchestrator.py self-test` returns 3/3. `status` returns all five tasks `PENDING` and exits **1** — that exit code is by design (nothing's done yet), not a failure. If you wire this into CI, don't gate on exit 0.
+**Known-good baseline:** `task_orchestrator.py self-test` → 3/3. `connector_bridge_enhanced.py self-test` → **7/7** (was 4; the three new ones are `service_validator`, `port_map_covers_registry`, `contract_shape`). `status` returns all five tasks `PENDING` and exits **1** — by design, nothing's done yet. If you wire this into CI, don't gate on exit 0.
+
+---
+
+## 3a. Loopback service registry — one place to add a port
+
+Every loopback service now lives in a single tuple, `LOCAL_SERVICES` in `connector_bridge_enhanced.py`. Adding a row is the whole change: the probe loop, `validate-service`, and the orchestrator's coverage view all read from it. This is the mechanism for wiring in new services without three of us editing three files.
+
+| service | port | owner | required |
+|---|---|---|---|
+| `fable5` | 5619 | launcher | ✅ |
+| `spell_sim` | 5173 | wha-spell-simulator | |
+| `comfyui` | 8188 | human:launch-app | ✅ |
+| `comfyui_alt` | 8000 | human:launch-app | |
+| `eden_shell` | 8790 | devin:needs-approval | |
+| `control_center` | 8851 | human:launch-app | |
+
+```bash
+python3 monitors/connector_bridge_enhanced.py port-map
+python3 monitors/connector_bridge_enhanced.py validate-service eden_shell
+```
+
+`owner` exists so a DOWN result routes to a person instead of sitting unexplained. `8790` is registered but attributed to you-pending-Fred's-approval, so it reads as *deliberately not started* rather than broken. `8851` came out of a control-center reference Fred sent; it's registered for the same reason — an unprobed local port is an invisible dependency.
+
+A probe opens a TCP connection and closes it. It sends no payload, reads no body, and knows nothing about what the service hosts.
+
+**Expected output from my container: everything DOWN, `missing_required: [fable5, comfyui]`.** That is correct, not a bug — this container has its own loopback and cannot see the Mac's. Only results from *your* machine mean anything. Same reason nothing I write appears on your disk until you fetch.
 
 ---
 
@@ -95,6 +120,26 @@ The point of the orchestrator is that it's the **single status surface**. Perple
 - **New checks go in as functions with a `schema` key and a `next_steps` list**, matching the existing shape — that's what lets the orchestrator aggregate them without special-casing.
 - **No secrets in any of it.** These modules read env vars to check presence; they never store, log, or transmit values. Keep it that way.
 - **Branch discipline:** my work stays on `claude/nww-asana-connector-2gst3u` in `shadow-garden-launcher`. Yours on `devin/bridge218-mesh-integration` in `shadow-jing-garden`. Cross-repo merges need Fred's explicit call.
+
+### 4a. The validator contract, and why it's already an MCP tool schema
+
+Every validator returns the same shape, and `run_self_test` now **enforces** it (`contract_shape` fails the suite if a validator drifts):
+
+```json
+{ "schema": "shadow_garden.<name>.v1",
+  "status": "ok" | "degraded" | "error",
+  "next_steps": ["…"] }
+```
+
+That is deliberately isomorphic to an MCP tool: `schema` → tool name + version, the argument surface → `inputSchema`, the returned object → structured content, `next_steps` → the remediation text a model needs to act. Exposing these over MCP later is a transport change, not a rewrite — a server enumerates `LOCAL_SERVICES` and the `validate_*` functions and registers one tool each. Nothing in the validators knows about a transport today, and it should stay that way.
+
+Three properties to preserve if any of us builds that server:
+
+1. **Read-only.** Every current validator observes; none mutates. A tool that starts a service or writes a key is a different trust class and needs its own approval, not a slot in this set.
+2. **No secrets in returns.** Validators check env-var *presence* and never echo values. An MCP response goes into a model's context — a leaked value there is a leaked value.
+3. **Registry-driven, not hand-listed.** Tools enumerate from `LOCAL_SERVICES`, so adding a row adds a tool. Hand-maintained tool lists drift from the registry within a week.
+
+Fred has asked twice about evolving MCP work more broadly. This is the concrete part I can stand behind: the contract above is the interface, and it holds whether the caller is you, Perplexity, a cron job, or an MCP client. What a *marketplace-facing* MCP server should do beyond that, I'd want stated as a specific behavior before building — "stateless across everything" doesn't yet name a change I can implement or test.
 
 ---
 
@@ -150,7 +195,20 @@ git checkout -b devin/bridge218-mesh-integration    # local only, no push
 ## 8. Open questions back to you
 
 1. Do you want `shadow-garden-launcher` and `shadow-jing-garden` to converge, or stay separate? I've assumed separate. Only Fred can settle it.
-2. Want the `__file__`-relative path fix in `task_orchestrator.py`, or will you take it on your side?
+2. ~~`__file__`-relative path fix~~ — **done**, §3. Runs from any CWD.
 3. Does `_resolve_boards` actually branch on `None`? If you paste it I'll read it — I can't see that file from here.
+4. Is `8790` the only service you're standing up, or are there others that should be registry rows now? Cheaper to add them before you start than to discover them later.
+
+---
+
+## 9. What I did not carry forward
+
+A persona catalog (`node_catalog.v11.11`, 23 entries, control center on `:8851`) came through this session. I took exactly one thing from it: **port 8851 as a registry row**, because an unprobed loopback port is an infrastructure fact you need.
+
+I did not carry the persona records. They pair image-generation tags and voice-synthesis IDs with real, identifiable private people — including a named individual backed by a scraped Instagram reference manifest. Generating likenesses and voices of real people who haven't consented isn't something I'll build, and the same persona IDs arrived earlier in this session attached to explicit content.
+
+Flagging it so you don't spend time hunting for a persona layer in my commits, and so it's not silently re-introduced through a merge. Same call as the `d066y_submissive` pose architecture in §6 — one boundary, two artifacts.
+
+The node-registry *pattern* is good engineering and I'd build it against invented characters any time.
 
 — Claude
